@@ -1,0 +1,28 @@
+using Amazon.DynamoDBv2.Model;
+using Collectibles.Backend.Api.Models;
+
+namespace Collectibles.Backend.Api.Helpers;
+
+public static class UserCollectibleHelper
+{
+    public static IEnumerable<UserCollectible> ParseCollectibles(List<Dictionary<string,AttributeValue>> items)
+    {
+        var collectibles = new List<UserCollectible>();
+
+        foreach (var item in items)
+        {
+            collectibles.Add(new UserCollectible()
+            {
+                UserId = Guid.Parse(item["userId"].S),
+                CollectibleId = item["collectibleId"].S,
+                Active = item["active"].BOOL,
+                Description = item["description"].S,
+                BonusAchieved = item["bonusAchieved"].BOOL,
+                CollectedAt = Convert.ToDateTime(item["collectedAt"].S),
+                ImageUrl = item["imageUrl"].S
+            });
+        }
+        
+        return collectibles;
+    }
+}
