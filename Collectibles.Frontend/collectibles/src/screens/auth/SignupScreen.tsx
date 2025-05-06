@@ -42,7 +42,7 @@ const SignupScreen: React.FC = () => {
             style={{ flex: 1 }}
         >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                <View style={styles.contentContainer}>
+                <View style={screenStyles.containerWithNavigation}>
                     <BackArrow />
                     <Text style={fontStyles.H3}>
                         Create a new account

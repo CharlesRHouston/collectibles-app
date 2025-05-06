@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import {screenStyles} from "../../styles/screenStyles";
 import BackArrow from "../../components/BackArrow";
 import {fontStyles} from "../../styles/fontStyles";
@@ -23,36 +23,38 @@ const LoginScreen: React.FC = () => {
     }
     
     return (
-        <View style={[screenStyles.screen, styles.contentContainer]}>
-            <BackArrow />
-            <Text style={fontStyles.H3}>
-                Log in to your account
-            </Text>
-            <View style={styles.textInputContainer}>
-                <TextField 
-                    label={"Email"} 
-                    value={loginForm.email.value} 
-                    mandatory={true}
-                    onTextChange={(text) => setLoginForm({...loginForm, email: { value: text, errors: loginForm.email.errors }})}
-                />
-                <TextField 
-                    label={"Password"} 
-                    value={loginForm.password.value} 
-                    mandatory={true}
-                    onTextChange={(text) => setLoginForm({...loginForm, password: { value: text, errors: loginForm.password.errors }})}
-                    showIcon={true}
-                />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={[screenStyles.containerWithNavigation, styles.contentContainer]}>
+                <BackArrow />
+                <Text style={fontStyles.H3}>
+                    Log in to your account
+                </Text>
+                <View style={styles.textInputContainer}>
+                    <TextField 
+                        label={"Email"} 
+                        value={loginForm.email.value} 
+                        mandatory={true}
+                        onTextChange={(text) => setLoginForm({...loginForm, email: { value: text, errors: loginForm.email.errors }})}
+                    />
+                    <TextField 
+                        label={"Password"} 
+                        value={loginForm.password.value} 
+                        mandatory={true}
+                        onTextChange={(text) => setLoginForm({...loginForm, password: { value: text, errors: loginForm.password.errors }})}
+                        showIcon={true}
+                    />
+                </View>
+                <Button 
+                    type={"primary"} 
+                    label="Log in" 
+                    onPress={ async () => {
+                        setLoading(true);
+                        await onSubmitLogin(loginForm, setLoginForm, dispatch);
+                        setLoading(false);
+                    }
+                }/>
             </View>
-            <Button 
-                type={"primary"} 
-                label="Log in" 
-                onPress={ async () => {
-                    setLoading(true);
-                    await onSubmitLogin(loginForm, setLoginForm, dispatch);
-                    setLoading(false);
-                }
-            }/>
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 

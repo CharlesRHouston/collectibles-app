@@ -9,7 +9,7 @@ const BackArrow: React.FC = () => {
         <View style={styles.iconContainer}>
             <TouchableOpacity style={styles.icon} onPress={() => navigation.goBack()} >
                 <Image
-                    source={require('../../assets/icons/Navigation - Back Arrow.png')}
+                    source={require('../../assets/icons/Navigation - Back Arrow (Brown).png')}
                     style={{ transform: [{ rotate: '-45deg' }] }}
                 />
             </TouchableOpacity>

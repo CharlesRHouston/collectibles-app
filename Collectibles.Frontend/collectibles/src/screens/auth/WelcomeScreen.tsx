@@ -13,7 +13,7 @@ const WelcomeScreen: React.FC = () => {
     const navigation = useNavigation<AuthScreenNavProp>();
     
     return (
-        <View style={[screenStyles.screen, styles.screen]}>
+        <View style={[screenStyles.containerWithoutNavigation, styles.screen]}>
             <Text style={fontStyles.H2}>
                 Welcome!
             </Text>

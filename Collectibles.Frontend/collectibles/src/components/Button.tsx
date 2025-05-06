@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 const Button : FC<ButtonProps> = ({label, onPress, type}) => {
-    return <TouchableOpacity onPress={onPress}>
+    return <TouchableOpacity onPress={onPress} >
         <View style={buttonContainerStyles[type]}>
             <Text style={buttonFontStyles[type]}>{label}</Text>
         </View>
