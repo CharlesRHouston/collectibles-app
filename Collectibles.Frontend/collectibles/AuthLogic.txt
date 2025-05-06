@@ -1,0 +1,12 @@
+//--1. Check if refresh token present
+//--2. If not, set isLoading: false + isSignedIn false (SIGN_OUT)
+//--3. Check if access token present
+//--4. If not, move to refresh logic (8)
+//--5. If present, check if valid
+//--6. If not, move to refresh logic (8)
+//--7. If valid, set isLoading: false + isSignedIn true (SIGN_IN)
+//--8. Call refresh API
+//--9. If success, update stored tokens and set isLoading: false + isSignedIn true (SIGN_IN)
+//--10. If unauthorized, clear tokens from storage and set isLoading: false + isSignedIn false (SIGN_OUT)
+//11. If connection failed, retry
+//--12. If still unauthorized, set isConnectionError: true
