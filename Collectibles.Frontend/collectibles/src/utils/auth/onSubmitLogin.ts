@@ -1,8 +1,7 @@
-import {HttpRequest, HttpResponse} from "../../types/Api";
-import {AuthAction, AuthenticationResponse, LoginForm, LoginRequest, RefreshRequest} from "../../types/Authentication";
-import axios, {AxiosResponse} from "axios";
+import {AuthAction, LoginForm} from "../../types/Authentication";
+import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-import publicApi from "../../api/publicApi";
+import AuthenticationService from "../../api/AuthenticationService";
 
 export const onSubmitLogin = async (
         loginForm: LoginForm,
@@ -10,16 +9,10 @@ export const onSubmitLogin = async (
         dispatch: React.Dispatch<AuthAction>
     ) : Promise<void> => {
     try {
-        const response = await publicApi.post<
-            HttpResponse<AuthenticationResponse>,
-            AxiosResponse<HttpResponse<AuthenticationResponse>>,
-            HttpRequest<LoginRequest>
-        >("/api/v1/auth/login", {
-            data: {
-                email: loginForm.email.value,
-                password: loginForm.password.value
-            }
-        })
+        const response = await AuthenticationService.login({ 
+            email: loginForm.email.value, 
+            password: loginForm.password.value 
+        });
         
         if (response.status === 200) {
             await SecureStore.setItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY, response.data.data.refreshToken);

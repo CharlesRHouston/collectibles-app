@@ -2,20 +2,13 @@ import {AuthAction, AuthenticationResponse, RefreshRequest} from "../../types/Au
 import * as SecureStore from "expo-secure-store";
 import axios, {AxiosResponse} from "axios";
 import React from "react";
-import {HttpRequest, HttpResponse} from "../../types/Api";
-import publicApi from "../../api/publicApi";
+import AuthenticationService from "../../api/AuthenticationService";
 
 export const RefreshAuthenticationTokens = async (dispatch:  React.Dispatch<AuthAction>, refreshToken: string) => {
     try {
-        const response = await publicApi.post<
-            HttpResponse<AuthenticationResponse>,
-            AxiosResponse<HttpResponse<AuthenticationResponse>>,
-            HttpRequest<RefreshRequest>
-        >(
-            '/api/v1/auth/refresh',
-            { data: { refreshToken } },
-            { validateStatus: status => status < 300 }
-        );
+        const response = await AuthenticationService.refresh({
+            refreshToken
+        });
 
         if (response.status === 200) {
             await SecureStore.setItemAsync(process.env.REACT_APP_AUTH_REFRESH_TOKEN, response.data.data.refreshToken);
