@@ -1,5 +1,5 @@
 import {fontStyles} from "../styles/fontStyles";
-import {StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, View} from "react-native";
 import React from "react";
 import BackArrow from "./BackArrow";
 
@@ -10,8 +10,8 @@ interface ScreenProps {
 }
 
 const Screen : React.FC<ScreenProps> = ({title, backNavigation, children}) => {
-    return (
-        <View style={backNavigation ? 
+    return (<>
+        <View style={backNavigation ?
             screenStyles.containerWithNavigation :
             screenStyles.containerWithoutNavigation
         }>
@@ -21,7 +21,7 @@ const Screen : React.FC<ScreenProps> = ({title, backNavigation, children}) => {
             </Text>
             {children}
         </View>
-    )
+    </>)
 }
 
 const baseStyles = StyleSheet.create({

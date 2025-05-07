@@ -24,8 +24,7 @@ import EditDetailsScreen from "../screens/collect/EditDetailsScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
 import ChangePasswordScreen from "../screens/settings/ChangePasswordScreen";
 import ChangeUsernameScreen from "../screens/settings/ChangeUsernameScreen";
-import {useEffect} from "react";
-import {Image} from "react-native";
+import {Image, StyleSheet, View} from "react-native";
 import {fontStyles} from "../styles/fontStyles";
 
 const Auth = createStackNavigator<AuthStackList>();
@@ -94,79 +93,94 @@ const BottomTab = createBottomTabNavigator<MainStackList>();
 
 export function MainStack() {
     return (
-        <BottomTab.Navigator 
-            initialRouteName="HomeStack"
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconSource;
+        <View style={{ flex: 1 }}>
+            <Image
+                source={require('../../assets/environment/Grass.png')}
+                style={styles.grassImage}
+                resizeMode="contain"
+            />
+            <BottomTab.Navigator
+                initialRouteName="HomeStack"
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                        let iconSource;
 
-                    if (route.name === 'HomeStack') {
-                        iconSource = focused ? 
-                            require('../../assets/icons/Nav Bar - Home - Active.png') :
-                            require('../../assets/icons/Nav Bar - Home - Inactive.png');
-                    } else if (route.name === 'CollectStack') {
-                        iconSource = focused ?
-                            require('../../assets/icons/Nav Bar - Add - Active.png') :
-                            require('../../assets/icons/Nav Bar - Add - Inactive.png');
-                    } else if (route.name === 'SettingsStack') {
-                        iconSource = focused ?
-                            require('../../assets/icons/Nav Bar - Profile - Active.png') :
-                            require('../../assets/icons/Nav Bar - Profile - Inactive.png');
+                        if (route.name === 'HomeStack') {
+                            iconSource = focused ?
+                                require('../../assets/icons/Nav Bar - Home - Active.png') :
+                                require('../../assets/icons/Nav Bar - Home - Inactive.png');
+                        } else if (route.name === 'CollectStack') {
+                            iconSource = focused ?
+                                require('../../assets/icons/Nav Bar - Add - Active.png') :
+                                require('../../assets/icons/Nav Bar - Add - Inactive.png');
+                        } else if (route.name === 'SettingsStack') {
+                            iconSource = focused ?
+                                require('../../assets/icons/Nav Bar - Profile - Active.png') :
+                                require('../../assets/icons/Nav Bar - Profile - Inactive.png');
+                        }
+
+                        return (
+                            <Image
+                                source={iconSource}
+                                style={{
+                                    width: size,
+                                    height: size,
+                                    tintColor: color,
+                                    marginBottom: 4
+                                }}
+                                resizeMode="contain"
+                            />
+                        );
+                    },
+                    tabBarActiveTintColor: '#FCFFC0',
+                    tabBarInactiveTintColor: '#FCFFC0',
+                    tabBarStyle: {
+                        backgroundColor: '#774448',
+                        borderTopWidth: 0,
+                        elevation: 0,
+                        height: 104,
+                        paddingTop: 24
+                    },
+                    tabBarLabelStyle: {
+                        ...fontStyles.L4,
+                        fontSize: 14
                     }
-
-                    return (
-                        <Image
-                            source={iconSource}
-                            style={{
-                                width: size,
-                                height: size,
-                                tintColor: color,
-                                marginBottom: 4
-                            }}
-                            resizeMode="contain"
-                        />
-                    );
-                },
-                tabBarActiveTintColor: '#FCFFC0',
-                tabBarInactiveTintColor: '#FCFFC0',
-                tabBarStyle: {
-                    backgroundColor: '#774448',
-                    borderTopWidth: 0,
-                    elevation: 0,
-                    height: 104,
-                    paddingTop: 24
-                },
-                tabBarLabelStyle: {
-                    ...fontStyles.L4,
-                    fontSize: 14
+                })
                 }
-            })
-            }
-        >
-            <BottomTab.Screen 
-                name="HomeStack" 
-                component={HomeStack} 
-                options={{ 
-                    headerShown: false,
-                    tabBarLabel: "Home"
-                }}  
-            />
-            <BottomTab.Screen 
-                name="CollectStack" 
-                component={CollectStack} 
-                options={{ 
-                    headerShown: false,
-                    tabBarLabel: "Collect"
-                }} 
-            />
-            <BottomTab.Screen 
-                name="SettingsStack" 
-                component={SettingsStack} 
-                options={{ 
-                    headerShown: false,
-                    tabBarLabel: "Settings"
-                }}
-            />
-        </BottomTab.Navigator>
+            >
+                <BottomTab.Screen
+                    name="HomeStack"
+                    component={HomeStack}
+                    options={{
+                        headerShown: false,
+                        tabBarLabel: "Home"
+                    }}
+                />
+                <BottomTab.Screen
+                    name="CollectStack"
+                    component={CollectStack}
+                    options={{
+                        headerShown: false,
+                        tabBarLabel: "Collect"
+                    }}
+                />
+                <BottomTab.Screen
+                    name="SettingsStack"
+                    component={SettingsStack}
+                    options={{
+                        headerShown: false,
+                        tabBarLabel: "Settings"
+                    }}
+                />
+            </BottomTab.Navigator>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    grassImage: {
+        position: 'absolute',
+        bottom: 80,
+        zIndex: 999,
+    }
+});
