@@ -1,4 +1,3 @@
-import collectibles from "../../api/collectibles";
 import {HttpRequest, HttpResponse} from "../../types/Api";
 import {
     AuthAction,
@@ -7,6 +6,7 @@ import {
 } from "../../types/Authentication";
 import axios, {AxiosResponse} from "axios";
 import * as SecureStore from "expo-secure-store";
+import publicApi from "../../api/publicApi";
 
 export const onSubmitSignup = async (
     signupForm: SignupForm,
@@ -14,7 +14,7 @@ export const onSubmitSignup = async (
     dispatch: React.Dispatch<AuthAction>
 ) : Promise<void> => {
     try {
-        const response = await collectibles.post<
+        const response = await publicApi.post<
             HttpResponse<AuthenticationResponse>,
             AxiosResponse<HttpResponse<AuthenticationResponse>>,
             HttpRequest<SignupRequest>

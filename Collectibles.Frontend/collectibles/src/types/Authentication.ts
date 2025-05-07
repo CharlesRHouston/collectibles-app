@@ -19,7 +19,7 @@ export interface SignupRequest extends AuthenticationRequest {
 }
 
 export interface RefreshRequest {
-    refreshToken: string;
+    refreshToken: string|null;
 }
 
 export type AuthState = {

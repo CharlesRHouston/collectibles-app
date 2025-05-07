@@ -1,13 +1,13 @@
-import collectibles from "../../api/collectibles";
 import {AuthAction, AuthenticationResponse, RefreshRequest} from "../../types/Authentication";
 import * as SecureStore from "expo-secure-store";
 import axios, {AxiosResponse} from "axios";
 import React from "react";
 import {HttpRequest, HttpResponse} from "../../types/Api";
+import publicApi from "../../api/publicApi";
 
 export const RefreshAuthenticationTokens = async (dispatch:  React.Dispatch<AuthAction>, refreshToken: string) => {
     try {
-        const response = await collectibles.post<
+        const response = await publicApi.post<
             HttpResponse<AuthenticationResponse>,
             AxiosResponse<HttpResponse<AuthenticationResponse>>,
             HttpRequest<RefreshRequest>
@@ -28,7 +28,7 @@ export const RefreshAuthenticationTokens = async (dispatch:  React.Dispatch<Auth
                 await SecureStore.deleteItemAsync(process.env.REACT_APP_AUTH_REFRESH_TOKEN);
                 await SecureStore.deleteItemAsync(process.env.REACT_APP_AUTH_ACCESS_TOKEN);
                 dispatch({ type: 'SIGN_OUT' });
-            } else if (!error.response) {
+            } else if (error.status === 404 || !error.response) {
                 console.error("Connection error:", error.message);
                 dispatch({ type: 'CONNECTION_ERROR' });
             } else {
