@@ -4,8 +4,8 @@ import Button from '../../components/Button';
 import {useNavigation} from "@react-navigation/native";
 import {AuthStackList } from "../../types/StackParamList";
 import type {StackNavigationProp} from "@react-navigation/stack";
-import {screenStyles} from "../../styles/screenStyles";
 import {fontStyles} from "../../styles/fontStyles";
+import {screenStyles} from "../../components/Screen";
 
 type AuthScreenNavProp = StackNavigationProp<AuthStackList, 'Welcome'>;
 

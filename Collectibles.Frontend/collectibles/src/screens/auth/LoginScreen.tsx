@@ -1,13 +1,11 @@
 import React, {useContext, useState} from 'react';
 import {View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native';
-import {screenStyles} from "../../styles/screenStyles";
-import BackArrow from "../../components/BackArrow";
-import {fontStyles} from "../../styles/fontStyles";
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 import {LoginForm} from "../../types/Authentication";
 import {AuthContext} from "../../../App";
 import {onSubmitLogin} from "../../utils/auth/onSubmitLogin";
+import Screen from "../../components/Screen";
 
 const LoginScreen: React.FC = () => {
     const [loginForm, setLoginForm] = useState<LoginForm>({
@@ -24,11 +22,7 @@ const LoginScreen: React.FC = () => {
     
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={[screenStyles.containerWithNavigation, styles.contentContainer]}>
-                <BackArrow />
-                <Text style={fontStyles.H3}>
-                    Log in to your account
-                </Text>
+            <Screen title={"Log in to your account"} backNavigation={true}>
                 <View style={styles.textInputContainer}>
                     <TextField 
                         label={"Email"} 
@@ -53,7 +47,7 @@ const LoginScreen: React.FC = () => {
                         setLoading(false);
                     }
                 }/>
-            </View>
+            </Screen>
         </TouchableWithoutFeedback>
     )
 }

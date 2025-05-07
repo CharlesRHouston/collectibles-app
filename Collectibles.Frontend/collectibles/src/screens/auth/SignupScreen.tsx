@@ -8,18 +8,16 @@ import {
     Platform,
     TouchableWithoutFeedback,
     Keyboard,
-    FlatList
 } from 'react-native';
-import {screenStyles} from "../../styles/screenStyles";
 import {fontStyles} from "../../styles/fontStyles";
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
-import BackArrow from "../../components/BackArrow";
 import {SignupForm} from "../../types/Authentication";
 import {AuthContext} from "../../../App";
 import {onSubmitSignup} from "../../utils/auth/onSubmitSignup";
 import {ValidateConfirmPassword, ValidatePassword} from "../../utils/validation/validatePassword";
 import Loading from "../../components/Loading";
+import Screen from "../../components/Screen";
 
 const SignupScreen: React.FC = () => {
     const [signupForm, setSignupForm] = useState<SignupForm>({
@@ -37,16 +35,12 @@ const SignupScreen: React.FC = () => {
         {
             loading &&  <Loading />
         }
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={{ flex: 1 }}
-        >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                <View style={screenStyles.containerWithNavigation}>
-                    <BackArrow />
-                    <Text style={fontStyles.H3}>
-                        Create a new account
-                    </Text>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} style={{borderWidth: 10, borderColor: 'red'}}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+            >
+                <Screen title={"Create a new account"} backNavigation={true} >
                     <ScrollView 
                         contentContainerStyle={{gap: 32}}
                         style={{width: '100%'}}
@@ -102,9 +96,9 @@ const SignupScreen: React.FC = () => {
                             ))}
                         </View>
                     </ScrollView>
-                </View>
-            </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+                </Screen>
+            </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     </>);
 }
 
