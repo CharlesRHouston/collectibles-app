@@ -8,6 +8,8 @@ import {RefreshAuthenticationTokens} from "./src/utils/auth/refreshAuthenticatio
 import {ValidateAccessTokenExpiration} from "./src/utils/auth/validateAccessTokenExpiration";
 import {AuthContextType, AuthState} from "./src/types/Authentication";
 import { useFonts } from 'expo-font';
+import Loading from "./src/components/Loading";
+import {BootstrapProvider} from "./src/context/BootstrapProvider";
 
 const initialState = {
     isLoading: true,
@@ -21,7 +23,6 @@ export const AuthContext = createContext<AuthContextType>(
         dispatch: () => {} 
     }
 );
-
 export default function App() {
     
     const [fontsLoaded] = useFonts({
@@ -34,6 +35,7 @@ export default function App() {
     
     useEffect(() => {
         const AppLaunchAuthenticationLogic = async () => {
+     
             let refreshToken = await SecureStore.getItemAsync('refreshToken');
 
             if (!refreshToken) {
@@ -62,7 +64,7 @@ export default function App() {
     }, []);
     
     if (!fontsLoaded || state.isLoading) {
-        return <Text>Loading...</Text>;
+        return <Loading />;
     }
 
     if (state.isConnectionError) {
@@ -71,15 +73,17 @@ export default function App() {
     
     return (
         <AuthContext.Provider value={{state, dispatch}}>
-            <NavigationContainer>
-                {
-                    state.isSignedIn ? (
-                        <MainStack/>
-                    ) : (
+            {
+                state.isSignedIn ?
+                    <NavigationContainer>
+                        <BootstrapProvider>
+                            <MainStack/>
+                        </BootstrapProvider>
+                    </NavigationContainer> :
+                    <NavigationContainer>
                         <AuthStack/>
-                    )
-                }
-            </NavigationContainer>
+                    </NavigationContainer>
+            }
         </AuthContext.Provider>
     );
 }
