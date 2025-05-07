@@ -35,12 +35,11 @@ const SignupScreen: React.FC = () => {
         {
             loading &&  <Loading />
         }
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} style={{borderWidth: 10, borderColor: 'red'}}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={{ flex: 1 }}
             >
-                <Screen title={"Create a new account"} backNavigation={true} >
+                <Screen title={"Create a new account"} backNavigation={true} dismissKeyboard={true}>
                     <ScrollView 
                         contentContainerStyle={{gap: 32}}
                         style={{width: '100%'}}
@@ -66,7 +65,7 @@ const SignupScreen: React.FC = () => {
                                 mandatory={true}
                                 onTextChange={(text) => setSignupForm({...signupForm, password: { value: text, errors: signupForm.password.errors }})}
                                 showIcon={true}
-                                validateField={() => ValidatePassword(signupForm, setSignupForm)}
+                                validateField={() => ValidatePassword(signupForm.password, setSignupForm)}
                                 errors={signupForm.password.errors}
                             />
                             <TextField
@@ -75,7 +74,7 @@ const SignupScreen: React.FC = () => {
                                 mandatory={true}
                                 onTextChange={(text) => setSignupForm({...signupForm, confirmPassword: { value: text, errors: signupForm.confirmPassword.errors }})}
                                 showIcon={true}
-                                validateField={() => ValidateConfirmPassword(signupForm, setSignupForm)}
+                                validateField={() => ValidateConfirmPassword(signupForm.password, signupForm.confirmPassword, setSignupForm)}
                                 errors={signupForm.confirmPassword.errors}
                             />
                         </View>
@@ -98,7 +97,6 @@ const SignupScreen: React.FC = () => {
                     </ScrollView>
                 </Screen>
             </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
     </>);
 }
 

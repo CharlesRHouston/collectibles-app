@@ -21,34 +21,32 @@ const LoginScreen: React.FC = () => {
     }
     
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <Screen title={"Log in to your account"} backNavigation={true}>
-                <View style={styles.textInputContainer}>
-                    <TextField 
-                        label={"Email"} 
-                        value={loginForm.email.value} 
-                        mandatory={true}
-                        onTextChange={(text) => setLoginForm({...loginForm, email: { value: text, errors: loginForm.email.errors }})}
-                    />
-                    <TextField 
-                        label={"Password"} 
-                        value={loginForm.password.value} 
-                        mandatory={true}
-                        onTextChange={(text) => setLoginForm({...loginForm, password: { value: text, errors: loginForm.password.errors }})}
-                        showIcon={true}
-                    />
-                </View>
-                <Button 
-                    type={"primary"} 
-                    label="Log in" 
-                    onPress={ async () => {
-                        setLoading(true);
-                        await onSubmitLogin(loginForm, setLoginForm, dispatch);
-                        setLoading(false);
-                    }
-                }/>
-            </Screen>
-        </TouchableWithoutFeedback>
+        <Screen title={"Log in to your account"} backNavigation={true} dismissKeyboard={true}>
+            <View style={styles.textInputContainer}>
+                <TextField 
+                    label={"Email"} 
+                    value={loginForm.email.value} 
+                    mandatory={true}
+                    onTextChange={(text) => setLoginForm({...loginForm, email: { value: text, errors: loginForm.email.errors }})}
+                />
+                <TextField 
+                    label={"Password"} 
+                    value={loginForm.password.value} 
+                    mandatory={true}
+                    onTextChange={(text) => setLoginForm({...loginForm, password: { value: text, errors: loginForm.password.errors }})}
+                    showIcon={true}
+                />
+            </View>
+            <Button 
+                type={"primary"} 
+                label="Log in" 
+                onPress={ async () => {
+                    setLoading(true);
+                    await onSubmitLogin(loginForm, setLoginForm, dispatch);
+                    setLoading(false);
+                }
+            }/>
+        </Screen>
     )
 }
 

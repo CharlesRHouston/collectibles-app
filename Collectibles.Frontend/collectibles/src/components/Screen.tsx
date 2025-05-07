@@ -1,5 +1,5 @@
 import {fontStyles} from "../styles/fontStyles";
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
 import React from "react";
 import BackArrow from "./BackArrow";
 
@@ -7,21 +7,29 @@ interface ScreenProps {
     title: string;
     backNavigation: boolean;
     children: React.ReactNode;
+    dismissKeyboard?: boolean;
 }
 
-const Screen : React.FC<ScreenProps> = ({title, backNavigation, children}) => {
-    return (<>
-        <View style={backNavigation ?
-            screenStyles.containerWithNavigation :
-            screenStyles.containerWithoutNavigation
-        }>
-            {backNavigation && <BackArrow />}
-            <Text style={fontStyles.H3}>
-                {title}
-            </Text>
-            {children}
-        </View>
-    </>)
+const Screen : React.FC<ScreenProps> = ({title, backNavigation, children, dismissKeyboard=false}) => {
+    const screen = <View style={backNavigation ?
+        screenStyles.containerWithNavigation :
+        screenStyles.containerWithoutNavigation
+    }>
+        {backNavigation && <BackArrow />}
+        <Text style={fontStyles.H3}>
+            {title}
+        </Text>
+        {children}
+    </View>;
+    
+    if (dismissKeyboard){
+        return (
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false} style={{ borderWidth: 3, borderColor: 'red'}}>
+                {screen}
+            </TouchableWithoutFeedback>
+        )
+    }
+    return (screen)
 }
 
 const baseStyles = StyleSheet.create({
