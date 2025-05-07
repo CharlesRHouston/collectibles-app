@@ -1,22 +1,21 @@
-import {SignupForm} from "../../types/Authentication";
+import {FieldState, PasswordForm, SignupForm} from "../../types/Authentication";
 import React from "react";
 
-export const ValidatePassword = (
-        signupForm : SignupForm, 
-        setSignupForm :  React.Dispatch<React.SetStateAction<SignupForm>>
+export const ValidatePassword = <T extends PasswordForm>(
+        password : FieldState, 
+        setSignupForm :  React.Dispatch<React.SetStateAction<T>>
     ) => {
-    const { value: value, errors: currentErrors } = signupForm.password;
-    const updatedErrors = new Set(currentErrors);
+    const updatedErrors = new Set(password.errors);
 
     const rules = [
         {
-            condition: value.length < 12,
-            message: "Password must be as least 12 characters.",
+            condition: password.value.length < 10,
+            message: "Password must be as least 10 characters.",
         },
-        // {
-        //     condition: !/[^A-Za-z0-9_]/.test(value),
-        //     message: "Password must contain a symbol.",
-        // },
+        {
+            condition: !/[^A-Za-z0-9_]/.test(password.value),
+            message: "Password must contain a symbol.",
+        },
     ];
 
     rules.forEach(({ condition, message }) => {
@@ -36,19 +35,22 @@ export const ValidatePassword = (
     }));
 }
 
-export const ValidateConfirmPassword = (signupForm : SignupForm, setSignupForm :  React.Dispatch<React.SetStateAction<SignupForm>>) => {
-    const { value: value, errors: currentErrors } = signupForm.confirmPassword;
-    const updatedErrors = new Set(currentErrors);
+export const ValidateConfirmPassword = <T extends PasswordForm>(
+    password : FieldState, 
+    confirmPassword : FieldState, 
+    setForm :  React.Dispatch<React.SetStateAction<T>>
+) => {
+    const updatedErrors = new Set(confirmPassword.errors);
 
     const message = "Passwords do not match.";
 
-    if (signupForm.confirmPassword.value != signupForm.password.value) {
+    if (password.value != confirmPassword.value) {
         updatedErrors.add(message);
     } else {
         updatedErrors.delete(message);
     }
 
-    setSignupForm((prev) => ({
+    setForm((prev) => ({
         ...prev,
         confirmPassword: {
             ...prev.confirmPassword,

@@ -38,7 +38,7 @@ export interface AuthContextType {
     dispatch: React.Dispatch<AuthAction>;
 }
 
-type FieldState = {
+export type FieldState = {
     value: string;
     errors: string[];
 };
@@ -49,10 +49,13 @@ export interface LoginForm {
     apiErrors: string[]
 }
 
-export interface SignupForm {
-    email: FieldState;
+export interface PasswordForm {
     password: FieldState;
     confirmPassword: FieldState;
+}
+
+export interface SignupForm extends PasswordForm {
+    email: FieldState;
     username: FieldState;
     apiErrors: string[]
 }

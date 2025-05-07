@@ -18,7 +18,7 @@ const ChangeUsernameScreen: React.FC = () => {
         {
             loading &&  <Loading />
         }
-        <Screen title="Change Username" backNavigation={true}>
+        <Screen title="Change Username" backNavigation={true} dismissKeyboard={true}>
             <View style={{width: '100%'}} >
             <TextField 
                 label={"Username"} 
