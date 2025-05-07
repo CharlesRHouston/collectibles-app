@@ -52,9 +52,9 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpPut]
+    [HttpPatch]
     [Authorize]
-    public async Task<IActionResult> UpdateUser([FromBody] Dto<UpdateUserRequest> user)
+    public async Task<IActionResult> UpdateUser([FromBody] Dto<UpdateUserRequest> request)
     {
         try
         {
@@ -65,7 +65,7 @@ public class UserController : ControllerBase
                 return Unauthorized("User ID not found in token.");
             }
             
-            await _databaseAccessService.UpdateUser(Guid.Parse(userId), user.Data);
+            await _databaseAccessService.UpdateUser(Guid.Parse(userId), request.Data);
             
             return Accepted();
         }

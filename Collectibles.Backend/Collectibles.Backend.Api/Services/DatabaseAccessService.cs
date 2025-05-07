@@ -107,11 +107,12 @@ public class DatabaseAccessService : IDatabaseAccessService
         await _client.UpdateItemAsync(new UpdateItemRequest()
         {
             TableName = "User",
-            AttributeUpdates = updates,
             Key = new Dictionary<string, AttributeValue>
             {
                 ["id"] = new() { S = userId.ToString() },
-            }
+            },
+            AttributeUpdates = updates,
+            //TODO: use update expression instead
         });
     }
 
