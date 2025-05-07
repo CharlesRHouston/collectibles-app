@@ -3,7 +3,7 @@ import { Button, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { HomeStackList } from '../../types/StackParamList';
-import {useProfileContext} from "../../context/ProfileProvider";
+import {useUserContext} from "../../context/ProfileProvider";
 
 type HomeScreenNavProp = StackNavigationProp<HomeStackList, 'Home'>;
 

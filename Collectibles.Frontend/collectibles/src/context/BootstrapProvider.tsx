@@ -1,8 +1,12 @@
 import {useEffect, useState} from "react";
-import {Profile, ProfileResponse} from "../types/Profile";
-import {ProfileContext} from "./ProfileProvider";
+import {User} from "../types/User";
+import {UserContext} from "./UserContext";
 import Loading from "../components/Loading";
 import DatabaseService from "../api/DatabaseService";
+import {Collection} from "../types/Collection";
+import {UserCollectible} from "../types/UserCollectible";
+import {CollectionContext} from "./CollectionContext";
+import {UserCollectibleContext} from "./UserCollectibleContext";
 
 interface BootstrapProviderProps {
     children: React.ReactNode;
@@ -10,16 +14,22 @@ interface BootstrapProviderProps {
 
 export const BootstrapProvider: React.FC<BootstrapProviderProps> = ({ children }) => {
     const [loading, setLoading] = useState(true);
-    const [profile, setProfile] = useState<Profile | null>(null);
+    const [user, setUser] = useState<User | null>(null);
+    const [collections, setCollections] = useState<Collection[] | null>(null);
+    const [userCollectibles, setUserCollectibles] = useState<UserCollectible[] | null>(null);
     
     useEffect(() => {
         const FetchAllData = async () => {
             try {
-                const [profile] = await Promise.all([
-                    DatabaseService.getUser()
+                const [user, collections, userCollectibles] = await Promise.all([
+                    DatabaseService.getUser(),
+                    DatabaseService.getAllCollections(),
+                    DatabaseService.getAllUserCollectibles()
                 ]);
                 
-                setProfile(profile.data.data);
+                setUser(user.data.data);
+                setCollections(collections.data.data);
+                setUserCollectibles(userCollectibles.data.data);
             } catch (error) {
                 console.error("Bootstrap fetch error:", error);
             } finally {
@@ -32,8 +42,12 @@ export const BootstrapProvider: React.FC<BootstrapProviderProps> = ({ children }
     if (loading) return <Loading />;
     
     return (
-        <ProfileContext.Provider value={{ profile, setProfile }}>
-            {children}
-        </ProfileContext.Provider>
+        <UserContext.Provider value={{ user, setUser }}>
+            <CollectionContext.Provider value={{ collections, setCollections}}>
+                <UserCollectibleContext.Provider value={{ userCollectibles, setUserCollectibles}}>
+                    {children}
+                </UserCollectibleContext.Provider>
+            </CollectionContext.Provider>
+        </UserContext.Provider>
     )
 }

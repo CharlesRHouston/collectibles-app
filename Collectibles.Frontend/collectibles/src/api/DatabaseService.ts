@@ -2,13 +2,18 @@ import axios, {AxiosError, AxiosInstance, AxiosResponse} from "axios";
 import * as SecureStore from "expo-secure-store";
 import AuthenticationService from "./AuthenticationService";
 import {HttpResponse} from "../types/Api";
-import {GetUserResponse, UpdateUserRequest} from "../types/Profile";
+import {GetUserResponse, UpdateUserRequest} from "../types/User";
 import {RefreshRequest} from "../types/Authentication";
+import {Collection} from "../types/Collection";
+import {UserCollectible} from "../types/UserCollectible";
 
 interface IDataBaseService {
-    logout(request : RefreshRequest): Promise<void>;
+    logout(request : RefreshRequest): Promise<AxiosResponse>;
     getUser(): Promise<AxiosResponse<HttpResponse<GetUserResponse>>>;
     updateUser(request: UpdateUserRequest) : Promise<AxiosResponse>;
+    getAllCollections() : Promise<AxiosResponse<HttpResponse<Collection[]>>>
+    putCollectible(request: UserCollectible) : Promise<AxiosResponse>;
+    getAllUserCollectibles() : Promise<AxiosResponse<HttpResponse<UserCollectible[]>>>;
 }
 
 class DatabaseService implements IDataBaseService {
@@ -59,19 +64,33 @@ class DatabaseService implements IDataBaseService {
         );
     }
     
-    getUser = async () => {
-        return await this.api.get<HttpResponse<GetUserResponse>>("api/v1/user");
-    }
-    
     logout = async (request : RefreshRequest) => {
-        await this.api.post("api/v1/auth/logout", {
+        return await this.api.post("api/v1/auth/logout", {
             data: request
         });
+    }
+    
+    getUser = async () => {
+        return await this.api.get<HttpResponse<GetUserResponse>>("api/v1/user");
     }
     
     updateUser = async (request : UpdateUserRequest) => {
         return await this.api.patch("api/v1/user", {
             data: request
+        });
+    }
+    
+    getAllCollections = async () => {
+        return await this.api.get<HttpResponse<Collection[]>>("api/v1/collection/all");
+    }
+    
+    getAllUserCollectibles = async () => {
+        return await this.api.get<HttpResponse<UserCollectible[]>>("api/v1/user/collectible/all");
+    }
+    
+    putCollectible = async (collectible : UserCollectible) => {
+        return await this.api.put("api/v1/user/collectible", {
+            data: collectible
         });
     }
 }

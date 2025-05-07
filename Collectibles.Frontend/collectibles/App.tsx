@@ -24,7 +24,6 @@ export const AuthContext = createContext<AuthContextType>(
     }
 );
 export default function App() {
-    
     const [fontsLoaded] = useFonts({
         'Retro Gaming': require('../collectibles/assets/fonts/Retro Gaming.ttf'),
         'C&C Red Alert [LAN]': require('../collectibles/assets/fonts/C&C Red Alert [LAN].ttf'),
@@ -35,15 +34,15 @@ export default function App() {
     
     useEffect(() => {
         const AppLaunchAuthenticationLogic = async () => {
-     
-            let refreshToken = await SecureStore.getItemAsync('refreshToken');
+            
+            let refreshToken = await SecureStore.getItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY);
 
             if (!refreshToken) {
                 dispatch({ type: 'SIGN_OUT' });
                 return;
             }
 
-            let accessToken = await SecureStore.getItemAsync('accessToken');
+            let accessToken = await SecureStore.getItemAsync(process.env.EXPO_PUBLIC_ACCESS_TOKEN_KEY);
 
             if (!accessToken){
                 await RefreshAuthenticationTokens(dispatch, refreshToken);

@@ -16,7 +16,7 @@ public class CollectionController : ControllerBase
         _databaseAccessService = databaseAccessService;
     }
     
-    [HttpGet]
+    [HttpGet("all")]
     [Authorize]
     public async Task<IActionResult> GetAllCollections()
     {

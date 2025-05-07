@@ -3,15 +3,15 @@ import Screen from "../../components/Screen";
 import TextField from "../../components/TextField";
 import Button from "../../components/Button";
 import {View} from "react-native";
-import {useProfileContext} from "../../context/ProfileProvider";
+import {useUserContext} from "../../context/UserContext";
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../../components/Loading";
 import DatabaseService from "../../api/DatabaseService";
 
 const ChangeUsernameScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
-    const { profile, setProfile} = useProfileContext();
-    const [username, setUsername] = useState(profile?.username ?? "");
+    const { user, setUser} = useUserContext();
+    const [username, setUsername] = useState(user?.username ?? "");
     const navigation = useNavigation();
     
     return (<>
@@ -32,13 +32,13 @@ const ChangeUsernameScreen: React.FC = () => {
                     type="primary" 
                     onPress={
                         async () => {
-                            if (profile) {
+                            if (user) {
                                 setLoading(true);
                                 await DatabaseService.updateUser({
                                     username,
                                 });
-                                setProfile({
-                                    ...profile,
+                                setUser({
+                                    ...user,
                                     username: username,
                                 });
                                 setLoading(false);
