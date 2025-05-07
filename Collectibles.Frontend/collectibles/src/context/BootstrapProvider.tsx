@@ -2,8 +2,7 @@ import {useEffect, useState} from "react";
 import {Profile, ProfileResponse} from "../types/Profile";
 import {ProfileContext} from "./ProfileProvider";
 import Loading from "../components/Loading";
-import {HttpResponse} from "../types/Api";
-import authenticatedApi from "../api/authenticatedApi";
+import DatabaseService from "../api/DatabaseService";
 
 interface BootstrapProviderProps {
     children: React.ReactNode;
@@ -17,7 +16,7 @@ export const BootstrapProvider: React.FC<BootstrapProviderProps> = ({ children }
         const FetchAllData = async () => {
             try {
                 const [profile] = await Promise.all([
-                    authenticatedApi.get<HttpResponse<ProfileResponse>>("api/v1/user")
+                    DatabaseService.getUser()
                 ]);
                 
                 setProfile(profile.data.data);

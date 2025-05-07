@@ -12,38 +12,13 @@ import Screen from "../../components/Screen";
 import {HttpRequest, HttpResponse} from "../../types/Api";
 import {AuthenticationResponse, LoginRequest, RefreshRequest} from "../../types/Authentication";
 import axios, {AxiosResponse} from "axios";
-import authenticatedApi from "../../api/authenticatedApi";
+import DatabaseService from "../../api/DatabaseService";
+import {onSubmitSignout} from "../../utils/auth/onSubmitSignout";
 
 const SettingsScreen: React.FC = () => {
-
     const {state, dispatch} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation<StackNavigationProp<SettingsStackList, 'Settings'>>();
-    
-    const onSignOut = async () => {
-        try {
-            setLoading(true);
-            const response = await authenticatedApi.post<
-                void,
-                AxiosResponse<void>,
-                HttpRequest<RefreshRequest>>("/api/v1/auth/logout", {
-                data: {
-                    refreshToken: await SecureStore.getItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY)
-                }
-            });
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.error("Axios error:", error.response?.status, error.response?.data);
-            } else {
-                console.error("Unexpected error:", error);
-            }
-        } finally {
-            await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY);
-            await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_ACCESS_TOKEN_KEY);
-            dispatch({ type: "SIGN_OUT"});
-            setLoading(false);
-        }
-    };
     
     return (<>
         {
@@ -63,7 +38,7 @@ const SettingsScreen: React.FC = () => {
                     <Button
                         label={"Sign out"}
                         type={'secondary'}
-                        onPress={onSignOut} />
+                        onPress={() => onSubmitSignout(setLoading, dispatch)} />
                 </View>
             </ScrollView>
         </Screen>

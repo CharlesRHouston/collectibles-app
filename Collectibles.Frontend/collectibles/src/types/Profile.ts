@@ -12,8 +12,14 @@ export interface ProfileContextType {
     setProfile: React.Dispatch<React.SetStateAction<Profile | null>>;
 }
 
-export interface ProfileResponse {
+export interface GetUserResponse {
     id: string;
     username: string;
     email: string;
+}
+
+export interface UpdateUserRequest {
+    email?: string;
+    username?: string;
+    password?: string;
 }

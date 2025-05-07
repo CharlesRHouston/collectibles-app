@@ -6,7 +6,7 @@ import {View} from "react-native";
 import {useProfileContext} from "../../context/ProfileProvider";
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../../components/Loading";
-import authenticatedApi from "../../api/authenticatedApi";
+import DatabaseService from "../../api/DatabaseService";
 
 const ChangeUsernameScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -34,13 +34,9 @@ const ChangeUsernameScreen: React.FC = () => {
                         async () => {
                             if (profile) {
                                 setLoading(true);
-                                await authenticatedApi.put("api/v1/user", {
-                                    data: {
-                                        username: username,
-                                        email: profile.email,
-                                        id: profile.id
-                                    }
-                                })
+                                await DatabaseService.updateUser({
+                                    username,
+                                });
                                 setProfile({
                                     ...profile,
                                     username: username,
