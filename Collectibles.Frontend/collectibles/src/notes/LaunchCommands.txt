@@ -1,0 +1,11 @@
+-- Backend
+./Scripts/bootstrap-dynamodb.sh 
+dotnet build
+dotnet run
+
+--Routing
+ngrok http https://localhost:7191
+
+-- Frontend
+npm start
+
