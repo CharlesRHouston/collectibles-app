@@ -16,19 +16,13 @@ export const RefreshAuthenticationTokens = async (dispatch:  React.Dispatch<Auth
             dispatch({ type: 'SIGN_IN' })
         }
     } catch (error) {
-        if (axios.isAxiosError(error)){
-            if (error.status === 401) {
-                await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY);
-                await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_ACCESS_TOKEN_KEY);
-                dispatch({ type: 'SIGN_OUT' });
-            } else if (error.status === 404 || !error.response) {
-                console.error("Connection error:", error.message);
-                dispatch({ type: 'CONNECTION_ERROR' });
-            } else {
-                console.error("Unexpected server error:", error.response.status);
-            }
+        if (axios.isAxiosError(error) && error.status === 401){
+            await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY);
+            await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_ACCESS_TOKEN_KEY);
+            dispatch({ type: 'SIGN_OUT' });
         } else {
             console.error("Unexpected server error.");
+            dispatch({ type: 'SIGN_OUT' });
         }
     }
 }
