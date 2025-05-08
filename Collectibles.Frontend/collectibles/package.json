@@ -22,7 +22,11 @@
     "expo-status-bar": "~2.2.3",
     "jwt-decode": "^4.0.0",
     "react": "^19.0.0",
-    "react-native": "^0.79.2"
+    "react-native": "^0.79.2",
+    "react-native-date-picker": "^5.0.12",
+    "react-native-gesture-handler": "^2.25.0",
+    "react-native-pager-view": "^6.7.1",
+    "react-native-safe-area-context": "^5.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
