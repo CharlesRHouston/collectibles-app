@@ -22,13 +22,13 @@ const SettingsScreen: React.FC = () => {
         }
         <Screen title={"Settings"} backNavigation={false} >
             <ScrollView contentContainerStyle={{gap: 24}}>
-                <Setting 
-                    label={"Change Password"} 
-                    onPress={() => navigation.navigate('ChangePassword')}
-                />
                 <Setting
                     label={"Change Username"}
                     onPress={() => navigation.navigate('ChangeUsername')}
+                />
+                <Setting 
+                    label={"Change Password"} 
+                    onPress={() => navigation.navigate('ChangePassword')}
                 />
                 <View style={{alignItems: 'center'}}>
                     <Button
