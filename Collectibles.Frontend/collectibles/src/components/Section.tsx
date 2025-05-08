@@ -1,6 +1,5 @@
 import React from "react";
 import {Text, View} from "react-native";
-import Button from "./Button";
 import {fontStyles} from "../styles/fontStyles";
 
 interface SectionProps {

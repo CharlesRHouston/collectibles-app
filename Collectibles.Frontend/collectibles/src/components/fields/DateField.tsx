@@ -20,18 +20,17 @@ import DatePicker from "react-native-date-picker";
 
 interface DateFieldProps {
     label: string;
-    mandatory?: boolean;
+    date: Date;
+    onDateChange: (date: Date) => void;
 }
 
-const DateField : React.FC<DateFieldProps> = ({ label, mandatory=false }) => {
-    const [date, setDate] = useState<Date>(new Date());
+const DateField : React.FC<DateFieldProps> = ({ label, date, onDateChange }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     
     return (
         <View style={styles.container}>
             <View style={styles.label}>
                 <Text style={fontStyles.L3}>{label}</Text>
-                {mandatory ? <Text style={styles.mandatory}>*</Text> : null }
             </View>
             <TouchableOpacity onPress={() => setIsOpen(true)}>
                 <View style={styles.input}>
