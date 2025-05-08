@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native';
-import TextField from "../../components/TextField";
+import TextField from "../../components/fields/TextField";
 import Button from "../../components/Button";
 import {LoginForm} from "../../types/Authentication";
 import {AuthContext} from "../../../App";

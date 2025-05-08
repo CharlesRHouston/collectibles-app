@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
 import Loading from "../../components/Loading";
-import TextField from "../../components/TextField";
+import TextField from "../../components/fields/TextField";
 import Screen from "../../components/Screen";
 import Button from "../../components/Button";
 import DatabaseService from "../../api/DatabaseService";
@@ -27,7 +27,7 @@ const ChangePasswordScreen: React.FC = () => {
                 <TextField
                     label={"New password"}
                     value={passwordForm.password.value}
-                    mandatory={true}
+                    mandatory={false}
                     showIcon={true}
                     validateField={() => ValidatePassword(passwordForm.password, setPasswordForm)}
                     onTextChange={(text) => setPasswordForm({
@@ -43,7 +43,7 @@ const ChangePasswordScreen: React.FC = () => {
                     label={"Confirm new password"}
                     value={passwordForm.confirmPassword.value}
                     showIcon={true}
-                    mandatory={true}
+                    mandatory={false}
                     validateField={() => ValidateConfirmPassword(passwordForm.password, passwordForm.confirmPassword, setPasswordForm)}
                     onTextChange={(text) => setPasswordForm({
                         ...passwordForm,

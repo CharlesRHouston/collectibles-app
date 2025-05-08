@@ -10,7 +10,7 @@ import {
     Keyboard,
 } from 'react-native';
 import {fontStyles} from "../../styles/fontStyles";
-import TextField from "../../components/TextField";
+import TextField from "../../components/fields/TextField";
 import Button from "../../components/Button";
 import {SignupForm} from "../../types/Authentication";
 import {AuthContext} from "../../../App";

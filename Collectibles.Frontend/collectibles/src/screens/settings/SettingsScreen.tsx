@@ -9,10 +9,6 @@ import {useNavigation} from "@react-navigation/native";
 import {SettingsStackList} from "../../types/StackParamList";
 import {StackNavigationProp} from "@react-navigation/stack";
 import Screen from "../../components/Screen";
-import {HttpRequest, HttpResponse} from "../../types/Api";
-import {AuthenticationResponse, LoginRequest, RefreshRequest} from "../../types/Authentication";
-import axios, {AxiosResponse} from "axios";
-import DatabaseService from "../../api/DatabaseService";
 import {onSubmitSignout} from "../../utils/auth/onSubmitSignout";
 
 const SettingsScreen: React.FC = () => {

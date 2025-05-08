@@ -6,11 +6,11 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
-import {fontStyles} from "../styles/fontStyles";
+import {fontStyles} from "../../styles/fontStyles";
 import {useState} from "react";
 import { AntDesign } from '@expo/vector-icons';
 
-interface TextInputProps {
+interface TextFieldProps {
     label: string;
     value: string;
     mandatory: boolean;
@@ -20,7 +20,7 @@ interface TextInputProps {
     showIcon?: boolean;
 }
 
-const TextField: React.FC<TextInputProps> = ({
+const TextField: React.FC<TextFieldProps> = ({
         label, 
         value, 
         onTextChange, 

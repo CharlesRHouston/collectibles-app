@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Screen from "../../components/Screen";
-import TextField from "../../components/TextField";
+import TextField from "../../components/fields/TextField";
 import Button from "../../components/Button";
 import {View} from "react-native";
 import {useUserContext} from "../../context/UserContext";
