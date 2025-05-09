@@ -4,7 +4,7 @@ import {AntDesign} from "@expo/vector-icons";
 
 interface TextAreaFieldProps {
     label: string;
-    value: string;
+    value: string|null;
     onTextChange: (text: string) => void;
 }
 
@@ -18,9 +18,8 @@ const TextAreaField : React.FC<TextAreaFieldProps> = ({ label, value, onTextChan
             <View>
                 <TextInput
                     style={styles.input}
-                    value={value}
+                    value={value ?? ""}
                     onChangeText={onTextChange}
-                    autoCapitalize={"none"}
                     autoCorrect={false}
                     multiline={true}
                 />

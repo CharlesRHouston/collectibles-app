@@ -11,7 +11,7 @@ interface SelectFieldProps {
     setValue: (value: string) => void;
 }
 
-interface DropdownData {
+export interface DropdownData {
     label: string;
     value: string;
 }

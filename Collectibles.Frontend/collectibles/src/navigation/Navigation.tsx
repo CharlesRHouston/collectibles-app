@@ -26,6 +26,7 @@ import ChangePasswordScreen from "../screens/settings/ChangePasswordScreen";
 import ChangeUsernameScreen from "../screens/settings/ChangeUsernameScreen";
 import {Image, StyleSheet, View} from "react-native";
 import {fontStyles} from "../styles/fontStyles";
+import {CollectProvider} from "../context/CollectProvider";
 
 const Auth = createStackNavigator<AuthStackList>();
 
@@ -67,13 +68,15 @@ const Collect = createStackNavigator<CollectStackList>();
 
 function CollectStack() {
     return (
-        <Collect.Navigator initialRouteName="ChooseCollectible">
-            <Collect.Screen name="ChooseCollectible" component={ChooseCollectibleScreen} options={{ headerShown: false }}/>
-            <Collect.Screen name="UploadPhoto" component={UploadPhotoScreen} options={{ headerShown: false }}/>
-            <Collect.Screen name="AddDetails" component={AddDetailsScreen} options={{ headerShown: false }}/>
-            <Collect.Screen name="ChangePhoto" component={ChangePhotoScreen} options={{ headerShown: false }}/>
-            <Collect.Screen name="EditDetails" component={EditDetailsScreen} options={{ headerShown: false }}/>
-        </Collect.Navigator>
+        <CollectProvider>
+            <Collect.Navigator initialRouteName="ChooseCollectible">
+                <Collect.Screen name="ChooseCollectible" component={ChooseCollectibleScreen} options={{ headerShown: false }}/>
+                <Collect.Screen name="UploadPhoto" component={UploadPhotoScreen} options={{ headerShown: false }}/>
+                <Collect.Screen name="AddDetails" component={AddDetailsScreen} options={{ headerShown: false }}/>
+                <Collect.Screen name="ChangePhoto" component={ChangePhotoScreen} options={{ headerShown: false }}/>
+                <Collect.Screen name="EditDetails" component={EditDetailsScreen} options={{ headerShown: false }}/>
+            </Collect.Navigator>
+        </CollectProvider>
     );
 }
 
