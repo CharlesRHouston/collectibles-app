@@ -1,13 +1,11 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import Screen from "../../components/Screen";
-import Section from "../../components/Section";
-import DateField from "../../components/fields/DateField";
-import TextAreaField from "../../components/fields/TextAreaField";
-import Button from "../../components/Button";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {CollectStackList} from "../../types/StackParamList";
+import Screen from "../../../components/Screen";
+import Section from "../../../components/Section";
+import Button from "../../../components/Button";
+import {CollectStackList} from "../../../types/StackParamList";
 
 const UploadPhotoScreen: React.FC = () => {
     const navigation = useNavigation<StackNavigationProp<CollectStackList, 'UploadPhoto'>>();

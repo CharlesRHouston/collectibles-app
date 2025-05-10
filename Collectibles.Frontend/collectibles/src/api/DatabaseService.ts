@@ -5,14 +5,14 @@ import {HttpResponse} from "../types/Api";
 import {GetUserResponse, UpdateUserRequest} from "../types/User";
 import {RefreshRequest} from "../types/Authentication";
 import {Collection} from "../types/Collection";
-import {UserCollectible} from "../types/UserCollectible";
+import {PutCollectibleRequest, UserCollectible} from "../types/UserCollectible";
 
 interface IDataBaseService {
     logout(request : RefreshRequest): Promise<AxiosResponse>;
     getUser(): Promise<AxiosResponse<HttpResponse<GetUserResponse>>>;
     updateUser(request: UpdateUserRequest) : Promise<AxiosResponse>;
     getAllCollections() : Promise<AxiosResponse<HttpResponse<Collection[]>>>
-    putCollectible(request: UserCollectible) : Promise<AxiosResponse>;
+    putCollectible(collectibleId: string, request: PutCollectibleRequest) : Promise<AxiosResponse>;
     getAllUserCollectibles() : Promise<AxiosResponse<HttpResponse<UserCollectible[]>>>;
 }
 
@@ -88,8 +88,8 @@ class DatabaseService implements IDataBaseService {
         return await this.api.get<HttpResponse<UserCollectible[]>>("api/v1/user/collectible/all");
     }
     
-    putCollectible = async (collectible : UserCollectible) => {
-        return await this.api.put("api/v1/user/collectible", {
+    putCollectible = async (collectibleId: string, collectible: PutCollectibleRequest) => {
+        return await this.api.put(`api/v1/user/collectible/${collectibleId}`, {
             data: collectible
         });
     }

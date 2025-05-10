@@ -1,5 +1,4 @@
 export interface UserCollectible {
-    userId: string;
     collectibleId: string;
     active?: boolean;
     description: string;

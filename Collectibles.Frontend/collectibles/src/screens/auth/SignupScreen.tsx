@@ -35,68 +35,68 @@ const SignupScreen: React.FC = () => {
         {
             loading &&  <Loading />
         }
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                style={{ flex: 1 }}
-            >
-                <Screen title={"Create a new account"} backNavigation={true} dismissKeyboard={true}>
-                    <ScrollView 
-                        contentContainerStyle={{gap: 32}}
-                        style={{width: '100%'}}
-                    >
-                        <View style={{ gap: 8, flexDirection: 'column', justifyContent: 'center' }}>
-                            <TextField
-                                label={"Username"}
-                                value={signupForm.username.value}
-                                mandatory={true}
-                                onTextChange={(text) => setSignupForm({...signupForm, username: { value: text, errors: signupForm.username.errors }})}
-                                errors={signupForm.username.errors}
-                            />
-                            <TextField
-                                label={"Email"}
-                                value={signupForm.email.value}
-                                mandatory={true}
-                                onTextChange={(text) => setSignupForm({...signupForm, email: { value: text, errors: signupForm.email.errors }})}
-                                errors={signupForm.email.errors}
-                            />
-                            <TextField
-                                label={"Password"}
-                                value={signupForm.password.value}
-                                mandatory={true}
-                                onTextChange={(text) => setSignupForm({...signupForm, password: { value: text, errors: signupForm.password.errors }})}
-                                showIcon={true}
-                                validateField={() => ValidatePassword(signupForm.password, setSignupForm)}
-                                errors={signupForm.password.errors}
-                            />
-                            <TextField
-                                label={"Confirm Password"}
-                                value={signupForm.confirmPassword.value}
-                                mandatory={true}
-                                onTextChange={(text) => setSignupForm({...signupForm, confirmPassword: { value: text, errors: signupForm.confirmPassword.errors }})}
-                                showIcon={true}
-                                validateField={() => ValidateConfirmPassword(signupForm.password, signupForm.confirmPassword, setSignupForm)}
-                                errors={signupForm.confirmPassword.errors}
-                            />
-                        </View>
-                        <View style={{gap: 8, flexDirection: 'column', alignItems: 'center'}}>
-                            <Button
-                                type={"primary"}
-                                label="Create Account"
-                                onPress={async () => {
-                                    setLoading(true);
-                                    await onSubmitSignup(signupForm, setSignupForm, dispatch);
-                                    setLoading(false);
-                                }
-                                }/>
-                            {signupForm.apiErrors.map((error) => (
-                                <Text key={error} style={[fontStyles.L3, styles.error]}>
-                                    {error}
-                                </Text>
-                            ))}
-                        </View>
-                    </ScrollView>
-                </Screen>
-            </KeyboardAvoidingView>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{ flex: 1 }}
+        >
+            <Screen title={"Create a new account"} backNavigation={true} dismissKeyboard={true}>
+                <ScrollView 
+                    contentContainerStyle={{gap: 32}}
+                    style={{width: '100%'}}
+                >
+                    <View style={{ gap: 8, flexDirection: 'column', justifyContent: 'center' }}>
+                        <TextField
+                            label={"Username"}
+                            value={signupForm.username.value}
+                            mandatory={true}
+                            onTextChange={(text) => setSignupForm({...signupForm, username: { value: text, errors: signupForm.username.errors }})}
+                            errors={signupForm.username.errors}
+                        />
+                        <TextField
+                            label={"Email"}
+                            value={signupForm.email.value}
+                            mandatory={true}
+                            onTextChange={(text) => setSignupForm({...signupForm, email: { value: text, errors: signupForm.email.errors }})}
+                            errors={signupForm.email.errors}
+                        />
+                        <TextField
+                            label={"Password"}
+                            value={signupForm.password.value}
+                            mandatory={true}
+                            onTextChange={(text) => setSignupForm({...signupForm, password: { value: text, errors: signupForm.password.errors }})}
+                            showIcon={true}
+                            validateField={() => ValidatePassword(signupForm.password, setSignupForm)}
+                            errors={signupForm.password.errors}
+                        />
+                        <TextField
+                            label={"Confirm Password"}
+                            value={signupForm.confirmPassword.value}
+                            mandatory={true}
+                            onTextChange={(text) => setSignupForm({...signupForm, confirmPassword: { value: text, errors: signupForm.confirmPassword.errors }})}
+                            showIcon={true}
+                            validateField={() => ValidateConfirmPassword(signupForm.password, signupForm.confirmPassword, setSignupForm)}
+                            errors={signupForm.confirmPassword.errors}
+                        />
+                    </View>
+                    <View style={{gap: 8, flexDirection: 'column', alignItems: 'center'}}>
+                        <Button
+                            type={"primary"}
+                            label="Create Account"
+                            onPress={async () => {
+                                setLoading(true);
+                                await onSubmitSignup(signupForm, setSignupForm, dispatch);
+                                setLoading(false);
+                            }
+                            }/>
+                        {signupForm.apiErrors.map((error) => (
+                            <Text key={error} style={[fontStyles.L3, styles.error]}>
+                                {error}
+                            </Text>
+                        ))}
+                    </View>
+                </ScrollView>
+            </Screen>
+        </KeyboardAvoidingView>
     </>);
 }
 

@@ -1,56 +1,31 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Screen from "../../components/Screen";
-import Section from "../../components/Section";
-import DateField from "../../components/fields/DateField";
-import TextAreaField from "../../components/fields/TextAreaField";
-import Button from "../../components/Button";
+import Screen from "../../../components/Screen";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {CollectStackList} from "../../types/StackParamList";
-import RadioField from "../../components/fields/RadioField";
-import {useCollectContext} from "../../context/CollectContext";
-import {fontStyles} from "../../styles/fontStyles";
-import DatabaseService from "../../api/DatabaseService";
+import {useCollectContext} from "../../../context/CollectContext";
+import {CollectStackList} from "../../../types/StackParamList";
+import Section from "../../../components/Section";
+import DateField from "../../../components/fields/DateField";
+import TextAreaField from "../../../components/fields/TextAreaField";
+import RadioField from "../../../components/fields/RadioField";
+import Button from "../../../components/Button";
+import {fontStyles} from "../../../styles/fontStyles";
+import {onSubmitCollect} from "../../../utils/collect/onSubmitCollect";
+import {validateAddDetails} from "../../../utils/validation/validateCollectForm";
+import Loading from "../../../components/Loading";
 
 const AddDetailsScreen: React.FC = () => {
     const navigation = useNavigation<StackNavigationProp<CollectStackList, 'AddDetails'>>();
 
+    const [loading, setLoading] = useState(false);
     const { form, setForm } = useCollectContext();
     const [errors, setErrors] = useState<string[]>([]);
     
-    const validateForm = () => {
-        const updatedErrors = new Set(errors);
-
-        const rules = [
-            {
-                condition: form.dateCollected === null,
-                message: "Date must be provided.",
-            },
-            {
-                condition: form.description === null || form.description!.length === 0,
-                message: "Description must be provided.",
-            },
-            {
-                condition: form.bonus === null,
-                message: "Bonus must be selected.",
-            }
-        ];
-
-        rules.forEach(({ condition, message }) => {
-            if (condition) {
-                updatedErrors.add(message);
-            } else {
-                updatedErrors.delete(message);
-            }
-        });
-
-        setErrors(Array.from(updatedErrors));
-
-        return updatedErrors.size === 0;
-    }
-    
-    return (
+    return (<>
+        {
+            loading &&  <Loading />
+        }
         <Screen title={"Add to your collection"} backNavigation={false} dismissKeyboard={true}>
             <Section title={"Add details"}>
                 <DateField
@@ -79,19 +54,12 @@ const AddDetailsScreen: React.FC = () => {
                 <Button
                     label={"Submit"}
                     onPress={async () => {
-                        const isValid = validateForm();
+                        setLoading(true)
+                        const isValid = validateAddDetails(form, errors, setErrors);
                         if (isValid) {
-                            await DatabaseService.putCollectible(
-                                form.collectible!, 
-                                {
-                                    collectedAt: form.dateCollected!.toString(),
-                                    active: true, 
-                                    description: form.description!,
-                                    bonusAchieved: form.bonus!,
-                                    imageUrl: form.imageUrl ?? "placeholder",
-                                }
-                            )
+                            await onSubmitCollect(form, errors, setErrors);
                         }
+                        setLoading(false);
                     }}
                     type={'primary'}
                 />
@@ -104,7 +72,7 @@ const AddDetailsScreen: React.FC = () => {
                 ))}
             </View>
         </Screen>
-    )
+    </>)
 }
 
 const styles = StyleSheet.create({

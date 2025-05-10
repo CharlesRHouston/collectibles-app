@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Screen from "../../components/Screen";
-import Section from "../../components/Section";
-import Button from "../../components/Button";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {CollectStackList} from "../../types/StackParamList";
-import SelectField, {DropdownData} from "../../components/fields/SelectField";
-import {useCollectionContext} from "../../context/CollectionContext";
-import {useCollectContext} from "../../context/CollectContext";
-import {fontStyles} from "../../styles/fontStyles";
+import {useCollectionContext} from "../../../context/CollectionContext";
+import {useCollectContext} from "../../../context/CollectContext";
+import {CollectStackList} from "../../../types/StackParamList";
+import SelectField, {DropdownData} from "../../../components/fields/SelectField";
+import Screen from "../../../components/Screen";
+import Section from "../../../components/Section";
+import {fontStyles} from "../../../styles/fontStyles";
+import Button from "../../../components/Button";
+
 
 const ChooseCollectibleScreen: React.FC = () => {
     const navigation = useNavigation<StackNavigationProp<CollectStackList, 'Collect'>>();
@@ -63,7 +64,7 @@ const ChooseCollectibleScreen: React.FC = () => {
     return (
         <Screen title={"Add to your collection"} backNavigation={false} dismissKeyboard={true}>
             <Section title={"Choose collectible"}>
-                <SelectField 
+                <SelectField
                     label={"Collection"} 
                     placeholder={"Select"}
                     data={collections!.map((collection) => { 
