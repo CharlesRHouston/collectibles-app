@@ -1,8 +1,8 @@
 import {createContext, useContext} from "react";
 
 export type CollectForm = {
-    collection?: string|null;
-    collectible?: string|null;
+    collectionId?: string|null;
+    collectibleId?: string|null;
     imageUrl?: string|null;
     dateCollected?: Date|null;
     description?: string|null;

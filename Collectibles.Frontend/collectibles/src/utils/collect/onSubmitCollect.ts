@@ -9,12 +9,12 @@ export const onSubmitCollect = async (
 ) => {
     try {
         await DatabaseService.putCollectible(
-            form.collectible!,
+            form.collectibleId!,
             {
                 collectedAt: form.dateCollected!.toISOString(),
                 active: true,
                 description: form.description!,
-                bonusAchieved: form.bonus!,
+                bonusAchieved: form.bonus ?? false,
                 imageUrl: form.imageUrl ?? "placeholder",
             }
         )

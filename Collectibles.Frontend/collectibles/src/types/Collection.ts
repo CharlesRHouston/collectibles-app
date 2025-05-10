@@ -27,6 +27,6 @@ export interface Collectible {
 }
 
 export interface Bonus {
-    description: string;
-    question: string;
+    description?: string;
+    question?: string;
 }

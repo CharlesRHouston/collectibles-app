@@ -14,13 +14,21 @@ import {fontStyles} from "../../../styles/fontStyles";
 import {onSubmitCollect} from "../../../utils/collect/onSubmitCollect";
 import {validateAddDetails} from "../../../utils/validation/validateCollectForm";
 import Loading from "../../../components/Loading";
+import {useCollectionContext} from "../../../context/CollectionContext";
 
 const AddDetailsScreen: React.FC = () => {
-    const navigation = useNavigation<StackNavigationProp<CollectStackList, 'AddDetails'>>();
-
     const [loading, setLoading] = useState(false);
-    const { form, setForm } = useCollectContext();
     const [errors, setErrors] = useState<string[]>([]);
+    const navigation = useNavigation<StackNavigationProp<CollectStackList, 'AddDetails'>>();
+    const { form, setForm } = useCollectContext();
+    
+    const { collections } = useCollectionContext();
+    const question = collections!
+        .find(collection => collection.id === form?.collectionId)
+        ?.categories
+        ?.flatMap(category => category.collectibles)
+        ?.find(collectible => collectible.id === form.collectibleId)
+        ?.bonus?.question;
     
     return (<>
         {
@@ -37,13 +45,16 @@ const AddDetailsScreen: React.FC = () => {
                     label={"Describe your experience"}
                     value={form.description!}
                     onTextChange={(text) => setForm({...form, description: text})} />
-                <RadioField 
-                    label={"Bonus gem: did you take a swim?"} 
-                    value={form.bonus} 
-                    setValue={(value) => setForm({...form, bonus: value})} 
-                    optionOneText={"Yes"} 
-                    optionTwoText={"No"} 
-                />
+                {
+                    question !== null &&
+                        <RadioField 
+                            label={"Bonus gem: did you take a swim?"} 
+                            value={form.bonus} 
+                            setValue={(value) => setForm({...form, bonus: value})} 
+                            optionOneText={"Yes"} 
+                            optionTwoText={"No"}
+                        />
+                }
             </Section>
             <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 12 }}>
                 <Button
@@ -63,8 +74,8 @@ const AddDetailsScreen: React.FC = () => {
                             bonus: null,
                             description: null,
                             dateCollected: new Date(),
-                            collectible: null,
-                            collection: null,
+                            collectibleId: null,
+                            collectionId: null,
                             imageUrl: null,
                         })
                         setLoading(false);

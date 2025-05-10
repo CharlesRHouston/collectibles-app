@@ -10,6 +10,7 @@ import Screen from "../../../components/Screen";
 import Section from "../../../components/Section";
 import {fontStyles} from "../../../styles/fontStyles";
 import Button from "../../../components/Button";
+import {validateChooseCollectible} from "../../../utils/validation/validateCollectForm";
 
 
 const ChooseCollectibleScreen: React.FC = () => {
@@ -20,7 +21,7 @@ const ChooseCollectibleScreen: React.FC = () => {
     const [errors, setErrors] = useState<string[]>([]);
     
     const getCollectibleDropdownOptions = () => {
-        const collection = collections?.find(c => c.id === form.collection);
+        const collection = collections?.find(c => c.id === form.collectionId);
         
         if (!collection) return [];
         
@@ -34,33 +35,6 @@ const ChooseCollectibleScreen: React.FC = () => {
         })
     };
     
-    const validateForm = () => {
-        const updatedErrors = new Set(errors);
-
-        const rules = [
-            {
-                condition: form.collection === null,
-                message: "Collection must be selected.",
-            },
-            {
-                condition: form.collectible === null,
-                message: "Collectible must be selected.",
-            },
-        ];
-        
-        rules.forEach(({ condition, message }) => {
-            if (condition) {
-                updatedErrors.add(message);
-            } else {
-                updatedErrors.delete(message);
-            }
-        });
-        
-        setErrors(Array.from(updatedErrors));
-        
-        return updatedErrors.size === 0;
-    }
-    
     return (
         <Screen title={"Add to your collection"} backNavigation={false} dismissKeyboard={true}>
             <Section title={"Choose collectible"}>
@@ -73,15 +47,15 @@ const ChooseCollectibleScreen: React.FC = () => {
                             value: collection.id,
                         } as DropdownData
                     })}
-                    value={form.collection!}
-                    setValue={(value) => setForm({...form, collection: value})}
+                    value={form.collectionId!}
+                    setValue={(value) => setForm({...form, collectionId: value})}
                 />
                 <SelectField
                     label={"Collectible"}
                     placeholder={"Select"}
                     data={getCollectibleDropdownOptions()}
-                    value={form.collectible!}
-                    setValue={(value) => setForm({...form, collectible: value})}
+                    value={form.collectibleId!}
+                    setValue={(value) => setForm({...form, collectibleId: value})}
                 />
             </Section>
             <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 12 }}>
@@ -93,7 +67,7 @@ const ChooseCollectibleScreen: React.FC = () => {
                 <Button 
                     label={"Next"} 
                     onPress={() => {
-                        const isValid = validateForm();
+                        const isValid = validateChooseCollectible(form, errors, setErrors);
                         if (isValid) {
                             navigation.navigate('UploadPhoto');
                         }

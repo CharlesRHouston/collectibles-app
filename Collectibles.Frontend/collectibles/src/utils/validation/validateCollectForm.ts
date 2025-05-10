@@ -34,3 +34,34 @@ export const validateAddDetails = (
 
     return updatedErrors.size === 0;
 }
+
+export const validateChooseCollectible = (
+    form: CollectForm,
+    errors: string[],
+    setErrors: React.Dispatch<React.SetStateAction<string[]>>
+) => {
+    const updatedErrors = new Set(errors);
+
+    const rules = [
+        {
+            condition: form.collectionId === null,
+            message: "Collection must be selected.",
+        },
+        {
+            condition: form.collectibleId === null,
+            message: "Collectible must be selected.",
+        },
+    ];
+
+    rules.forEach(({ condition, message }) => {
+        if (condition) {
+            updatedErrors.add(message);
+        } else {
+            updatedErrors.delete(message);
+        }
+    });
+
+    setErrors(Array.from(updatedErrors));
+
+    return updatedErrors.size === 0;
+}
