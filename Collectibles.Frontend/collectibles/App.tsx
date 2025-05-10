@@ -1,5 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {AuthStack, MainStack} from './src/navigation/Navigation';
+import {AuthStack, MainStack} from './src/navigations/Navigation';
 import {useEffect, useReducer, createContext} from 'react';
 import {Text} from 'react-native';
 import * as SecureStore from 'expo-secure-store';
