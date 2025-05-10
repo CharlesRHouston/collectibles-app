@@ -59,7 +59,16 @@ const AddDetailsScreen: React.FC = () => {
                         if (isValid) {
                             await onSubmitCollect(form, errors, setErrors);
                         }
+                        setForm({
+                            bonus: null,
+                            description: null,
+                            dateCollected: new Date(),
+                            collectible: null,
+                            collection: null,
+                            imageUrl: null,
+                        })
                         setLoading(false);
+                        navigation.navigate('ChooseCollectible');//TODO: navigate to collected collectible
                     }}
                     type={'primary'}
                 />

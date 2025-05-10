@@ -10,7 +10,7 @@ export const CollectProvider: React.FC<CollectProviderProps> = ({ children }) =>
         collection: null,
         collectible: null,
         imageUrl: null,
-        dateCollected: null,
+        dateCollected: new Date(),
         bonus: null,
         description: null
     });

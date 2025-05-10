@@ -11,7 +11,7 @@ export const onSubmitCollect = async (
         await DatabaseService.putCollectible(
             form.collectible!,
             {
-                collectedAt: form.dateCollected!.toString(),
+                collectedAt: form.dateCollected!.toISOString(),
                 active: true,
                 description: form.description!,
                 bonusAchieved: form.bonus!,
