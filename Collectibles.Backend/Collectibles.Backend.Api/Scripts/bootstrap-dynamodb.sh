@@ -91,39 +91,167 @@ echo "Seeding data..."
 aws dynamodb put-item \
   --table-name Collection \
   --item '{
-    "id": { "S": "capetown" },
-    "name": { "S": "Cape Town" },
-    "country": { "S": "South Africa" },
-    "categories": {
-      "L": [
-        {
-          "M": {
-            "id": { "S": "capetown-beaches" },
-            "name": { "S": "Beaches" },
-            "type": { "S": "IconicPlaces" },
-            "collectibles": {
-              "L": [
-                {
-                  "M": {
-                    "id": { "S": "capetown-beaches-muizenburg" },
-                    "name": { "S": "Muizenburg" },
-                    "clue": { "S": "Head towards silvermine." },
-                    "bonus": {
-                      "M": {
-                        "description": { "S": "Take a swim while you are there." },
-                        "question": { "S": "Did you take a swim?" }
+  "id": {
+    "S": "capetown"
+  },
+  "name": {
+    "S": "Cape Town"
+  },
+  "country": {
+    "S": "South Africa"
+  },
+  "categories": {
+    "L": [
+      {
+        "M": {
+          "id": {
+            "S": "capetown-beaches"
+          },
+          "name": {
+            "S": "Beaches"
+          },
+          "type": {
+            "S": "IconicPlaces"
+          },
+          "collectibles": {
+            "L": [
+              {
+                "M": {
+                  "id": {
+                    "S": "capetown-beaches-muizenburg"
+                  },
+                  "name": {
+                    "S": "Muizenburg"
+                  },
+                  "clue": {
+                    "S": "Head towards silvermine."
+                  },
+                  "bonus": {
+                    "M": {
+                      "description": {
+                        "S": "Take a swim while you are there."
+                      },
+                      "question": {
+                        "S": "Did you take a swim?"
                       }
-                    },
-                    "pixelArtFilename": { "S": "muizenburg.png" }
+                    }
+                  },
+                  "pixelArtFilename": {
+                    "S": "beach.png"
                   }
                 }
-              ]
-            }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "capetown-beaches-campsbay"
+                  },
+                  "name": {
+                    "S": "Camps Bay"
+                  },
+                  "clue": {
+                    "S": "Head towards Camps Bay."
+                  },
+                  "bonus": {
+                    "M": {
+                      "description": {
+                        "S": "Take a swim while you are there."
+                      },
+                      "question": {
+                        "S": "Did you take a swim?"
+                      }
+                    }
+                  },
+                  "pixelArtFilename": {
+                    "S": "beach.png"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "capetown-beaches-boulders"
+                  },
+                  "name": {
+                    "S": "Boulders Beach"
+                  },
+                  "clue": {
+                    "S": "Head towards Cape Point."
+                  },
+                  "bonus": {
+                    "M": {
+                      "description": {
+                        "S": "Take a swim while you are there."
+                      },
+                      "question": {
+                        "S": "Did you take a swim?"
+                      }
+                    }
+                  },
+                  "pixelArtFilename": {
+                    "S": "beach.png"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "capetown-beaches-clifton"
+                  },
+                  "name": {
+                    "S": "Clifton"
+                  },
+                  "clue": {
+                    "S": "Head towards Sea Point."
+                  },
+                  "bonus": {
+                    "M": {
+                      "description": {
+                        "S": "Take a swim while you are there."
+                      },
+                      "question": {
+                        "S": "Did you take a swim?"
+                      }
+                    }
+                  },
+                  "pixelArtFilename": {
+                    "S": "beach.png"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "id": {
+                    "S": "capetown-beaches-blouberg"
+                  },
+                  "name": {
+                    "S": "Blouberg"
+                  },
+                  "clue": {
+                    "S": "Head towards Bloubergstrand."
+                  },
+                  "bonus": {
+                    "M": {
+                      "description": {
+                        "S": "Take a swim while you are there."
+                      },
+                      "question": {
+                        "S": "Did you take a swim?"
+                      }
+                    }
+                  },
+                  "pixelArtFilename": {
+                    "S": "beach.png"
+                  }
+                }
+              }
+            ]
           }
         }
-      ]
-    }
-  }' \
+      }
+    ]
+  }
+}' \
   --endpoint-url $ENDPOINT
 
 echo "✅ All tables and seed data created."
