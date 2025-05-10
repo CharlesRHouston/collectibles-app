@@ -12,7 +12,7 @@ const Setting : React.FC<SettingProps> = ({label, onPress}) => {
         <View style={styles.setting}>
             <Text style={fontStyles.L2}>{label}</Text>
             <Image
-                source={require('../../assets/icons/Navigation - Back Arrow (Green).png')}
+                source={require('../../assets/images/icons/Arrow - Green.png')}
                 style={{ transform: [{ rotate: '135deg' }] }}
             />
         </View>

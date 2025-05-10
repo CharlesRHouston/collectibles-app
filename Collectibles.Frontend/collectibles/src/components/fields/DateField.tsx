@@ -35,7 +35,7 @@ const DateField : React.FC<DateFieldProps> = ({ label, date, onDateChange }) => 
             <TouchableOpacity onPress={() => setIsOpen(true)}>
                 <View style={styles.input}>
                     <Image
-                        source={require('../../../assets/icons/Icon - Calendar.png')}
+                        source={require('../../../assets/images/icons/Calendar.png')}
                     />
                     <Text style={fontStyles.B3}>{date.toLocaleDateString('en-GB', {
                         day: '2-digit',

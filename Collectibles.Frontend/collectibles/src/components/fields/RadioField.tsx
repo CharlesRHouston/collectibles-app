@@ -44,10 +44,10 @@ const RadioButton : React.FC<RadioButtonProps> = ({ label, condition, onPress })
         <View style={styles.radio}>
             {condition ?
                 <Image
-                    source={require('../../../assets/radioField/Radio - On.png')}
+                    source={require('../../../assets/images/icons/Radio - On.png')}
                 /> :
                 <Image
-                    source={require('../../../assets/radioField/Radio - Off.png')}
+                    source={require('../../../assets/images/icons/Radio - Off.png')}
                 />
             }
             <Text style={fontStyles.L3}>{label}</Text>

@@ -110,16 +110,16 @@ export function MainStack() {
 
                         if (route.name === 'HomeStack') {
                             iconSource = focused ?
-                                require('../../assets/icons/Nav Bar - Home - Active.png') :
-                                require('../../assets/icons/Nav Bar - Home - Inactive.png');
+                                require('../../assets/images/icons/Home - Active.png') :
+                                require('../../assets/images/icons/Home - Inactive.png');
                         } else if (route.name === 'CollectStack') {
                             iconSource = focused ?
-                                require('../../assets/icons/Nav Bar - Add - Active.png') :
-                                require('../../assets/icons/Nav Bar - Add - Inactive.png');
+                                require('../../assets/images/icons/Collect - Active.png') :
+                                require('../../assets/images/icons/Collect - Inactive.png');
                         } else if (route.name === 'SettingsStack') {
                             iconSource = focused ?
-                                require('../../assets/icons/Nav Bar - Profile - Active.png') :
-                                require('../../assets/icons/Nav Bar - Profile - Inactive.png');
+                                require('../../assets/images/icons/Settings - Active.png') :
+                                require('../../assets/images/icons/Settings - Inactive.png');
                         }
 
                         return (
