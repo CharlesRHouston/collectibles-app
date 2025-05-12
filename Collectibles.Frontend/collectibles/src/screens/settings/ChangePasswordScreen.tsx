@@ -4,7 +4,7 @@ import Loading from "../../components/Loading";
 import TextField from "../../components/fields/TextField";
 import Screen from "../../components/Screen";
 import Button from "../../components/Button";
-import DatabaseService from "../../api/DatabaseService";
+import ApiService from "../../services/ApiService";
 import {ValidateConfirmPassword, ValidatePassword} from "../../utils/validation/validatePassword";
 import {PasswordForm, SignupForm} from "../../types/Authentication";
 import {useNavigation} from "@react-navigation/native";
@@ -61,7 +61,7 @@ const ChangePasswordScreen: React.FC = () => {
                     type="primary"
                     onPress={async () => {
                         setLoading(true);
-                        await DatabaseService.updateUser({
+                        await ApiService.updateUser({
                             password: passwordForm.password.value,
                         });
                         setLoading(false);

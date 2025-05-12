@@ -26,7 +26,7 @@ import ChangePasswordScreen from "../screens/settings/ChangePasswordScreen";
 import ChangeUsernameScreen from "../screens/settings/ChangeUsernameScreen";
 import {Image, StyleSheet, View} from "react-native";
 import {fontStyles} from "../styles/fontStyles";
-import {CollectProvider} from "../context/CollectProvider";
+import {CollectProvider} from "../contexts/CollectProvider";
 
 const Auth = createStackNavigator<AuthStackList>();
 
@@ -98,7 +98,7 @@ export function MainStack() {
     return (
         <View style={{ flex: 1 }}>
             <Image
-                source={require('../../assets/environment/Grass.png')}
+                source={require('../../assets/images/environment/Grass.png')}
                 style={styles.grassImage}
                 resizeMode="contain"
             />

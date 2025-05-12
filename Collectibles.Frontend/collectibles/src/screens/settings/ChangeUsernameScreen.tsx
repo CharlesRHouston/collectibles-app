@@ -3,10 +3,10 @@ import Screen from "../../components/Screen";
 import TextField from "../../components/fields/TextField";
 import Button from "../../components/Button";
 import {View} from "react-native";
-import {useUserContext} from "../../context/UserContext";
+import {useUserContext} from "../../contexts/UserContext";
 import {useNavigation} from "@react-navigation/native";
 import Loading from "../../components/Loading";
-import DatabaseService from "../../api/DatabaseService";
+import ApiService from "../../services/ApiService";
 
 const ChangeUsernameScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ const ChangeUsernameScreen: React.FC = () => {
                         async () => {
                             if (user) {
                                 setLoading(true);
-                                await DatabaseService.updateUser({
+                                await ApiService.updateUser({
                                     username,
                                 });
                                 setUser({

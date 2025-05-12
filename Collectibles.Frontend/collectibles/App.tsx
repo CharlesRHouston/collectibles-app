@@ -9,7 +9,7 @@ import {ValidateAccessTokenExpiration} from "./src/utils/auth/validateAccessToke
 import {AuthContextType, AuthState} from "./src/types/Authentication";
 import { useFonts } from 'expo-font';
 import Loading from "./src/components/Loading";
-import {BootstrapProvider} from "./src/context/BootstrapProvider";
+import {BootstrapProvider} from "./src/contexts/BootstrapProvider";
 
 const initialState = {
     isLoading: true,
