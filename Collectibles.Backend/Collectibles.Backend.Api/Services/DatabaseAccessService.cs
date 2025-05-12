@@ -258,12 +258,13 @@ public class DatabaseAccessService : IDatabaseAccessService
             {
                 { "userId", new AttributeValue { S = userId.ToString() } },
                 { "collectibleId", new AttributeValue { S = collectibleId } },
+                { "collectionId", new AttributeValue { S = collectible.CollectionId } },
                 { "active", new AttributeValue { BOOL = collectible.Active } },
                 { "description", new AttributeValue { S = collectible.Description } },
                 { "collectedAt", new AttributeValue { S = collectible.CollectedAt.ToString(CultureInfo.InvariantCulture) }},
                 { "imageUrl", new AttributeValue { S = collectible.ImageUrl } },
                 { "bonusAchieved", new AttributeValue { BOOL = collectible.BonusAchieved } },
-                { "collectionId", new AttributeValue { S = collectible.CollectionId } }
+                { "categoryType", new AttributeValue { S = collectible.CategoryType.ToString() } }
             }
         });
     }

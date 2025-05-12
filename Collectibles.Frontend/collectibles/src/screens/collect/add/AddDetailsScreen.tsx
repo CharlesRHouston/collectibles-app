@@ -25,6 +25,7 @@ const AddDetailsScreen: React.FC = () => {
     const { form, setForm } = useCollectContext();
     
     const { collections } = useCollectionContext();
+    
     const question = collections!
         .find(collection => collection.id === form?.collectionId)
         ?.categories
@@ -74,7 +75,7 @@ const AddDetailsScreen: React.FC = () => {
                         setLoading(true)
                         const isValid = validateAddDetails(form, errors, setErrors);
                         if (isValid) {
-                            await onSubmitCollect(form, errors, setErrors);
+                            await onSubmitCollect(form, errors, setErrors, collections!);
                         }
                         setForm({
                             bonus: null,
@@ -86,6 +87,7 @@ const AddDetailsScreen: React.FC = () => {
                         })
                         setLoading(false);
                         navigation.navigate('ChooseCollectible');//TODO: navigate to collected collectible
+                        //TODO: refresh APIs
                     }}
                     type={'primary'}
                 />

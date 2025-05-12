@@ -2,13 +2,13 @@ import ApiService from "../../services/apiService";
 import axios from "axios";
 import {CollectForm} from "../../contexts/CollectContext";
 import {useCollectionContext} from "../../contexts/CollectionContext";
+import {CategoryType, Collection} from "../../types/collection";
 
 const getCategoryType = (
+    collections: Collection[],
     collectionId: string, 
     collectibleId: string
 ) => {
-    const { collections } = useCollectionContext();
-    
     const collection = collections!.find(
         collection => collection.id === collectionId
     );
@@ -23,7 +23,8 @@ const getCategoryType = (
 export const onSubmitCollect = async (
     form: CollectForm, 
     errors: string[], 
-    setErrors:  React.Dispatch<React.SetStateAction<string[]>>
+    setErrors:  React.Dispatch<React.SetStateAction<string[]>>,
+    collections: Collection[]
 ) => {
     try {
         await ApiService.putCollectible(
@@ -35,7 +36,7 @@ export const onSubmitCollect = async (
                 bonusAchieved: form.bonus!,
                 imageUrl: form.imageUrl ?? "placeholder",
                 collectionId: form.collectionId!,
-                categoryType: getCategoryType(form.collectionId!, form.collectibleId!)!
+                categoryType: getCategoryType(collections, form.collectionId!, form.collectibleId!)!
             }
         )
 

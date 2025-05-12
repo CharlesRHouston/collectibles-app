@@ -15,11 +15,13 @@ public static class UserCollectibleHelper
             {
                 UserId = Guid.Parse(item["userId"].S),
                 CollectibleId = item["collectibleId"].S,
+                CollectionId = item["collectionId"].S,
                 Active = item["active"].BOOL,
                 Description = item["description"].S,
-                BonusAchieved = item["bonusAchieved"].BOOL,
+                BonusAchieved = item["bonusAchieved"]?.BOOL,
                 CollectedAt = Convert.ToDateTime(item["collectedAt"].S),
-                ImageUrl = item["imageUrl"].S
+                ImageUrl = item["imageUrl"].S,
+                CategoryType = Enum.Parse<CategoryType>(item["categoryType"].S),
             });
         }
         
