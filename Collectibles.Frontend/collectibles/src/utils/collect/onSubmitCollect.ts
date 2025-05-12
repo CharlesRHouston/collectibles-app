@@ -1,8 +1,9 @@
 import ApiService from "../../services/apiService";
 import axios from "axios";
 import {CollectForm} from "../../contexts/CollectContext";
-import {useCollectionContext} from "../../contexts/CollectionContext";
-import {CategoryType, Collection} from "../../types/collection";
+import {Collection} from "../../types/collection";
+import {UserCollectible} from "../../types/userCollectible";
+import {Dispatch, SetStateAction} from "react";
 
 const getCategoryType = (
     collections: Collection[],
@@ -22,23 +23,45 @@ const getCategoryType = (
 
 export const onSubmitCollect = async (
     form: CollectForm, 
+    setForm:  (form: CollectForm) => void,
     errors: string[], 
-    setErrors:  React.Dispatch<React.SetStateAction<string[]>>,
-    collections: Collection[]
+    setErrors:  Dispatch<SetStateAction<string[]>>,
+    userCollectibles: UserCollectible[],
+    setUserCollectibles: Dispatch<SetStateAction<UserCollectible[]|null>>,
+    collections: Collection[],
 ) => {
     try {
+        const request = {
+            collectionId: form.collectionId!,
+            collectedAt: form.dateCollected!.toISOString(),
+            active: true,
+            description: form.description!,
+            bonusAchieved: form.bonus!,
+            imageUrl: form.imageUrl ?? "placeholder",
+            categoryType: getCategoryType(collections, form.collectionId!, form.collectibleId!)!
+        }
+        
         await ApiService.putCollectible(
             form.collectibleId!,
+            request
+        );
+        
+        setUserCollectibles([
+            ...userCollectibles,
             {
-                collectedAt: form.dateCollected!.toISOString(),
-                active: true,
-                description: form.description!,
-                bonusAchieved: form.bonus!,
-                imageUrl: form.imageUrl ?? "placeholder",
-                collectionId: form.collectionId!,
-                categoryType: getCategoryType(collections, form.collectionId!, form.collectibleId!)!
+                collectibleId: form.collectibleId!,
+                ...request
             }
-        )
+        ])
+
+        setForm({
+            collectionId: null,
+            collectibleId: null,
+            imageUrl: null,
+            dateCollected: new Date(),
+            description: null,
+            bonus: null,
+        });
 
         setErrors([]);
     } catch(error) {

@@ -17,6 +17,7 @@ import Loading from "../../../components/Loading";
 import {useCollectionContext} from "../../../contexts/CollectionContext";
 import {buttonContainerStyles, buttonStyles} from "../../../styles/buttonStyles";
 import {errorStyles} from "../../../styles/errorStyles";
+import {useUserCollectibleContext} from "../../../contexts/UserCollectibleContext";
 
 const AddDetailsScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -25,6 +26,7 @@ const AddDetailsScreen: React.FC = () => {
     const { form, setForm } = useCollectContext();
     
     const { collections } = useCollectionContext();
+    const { userCollectibles, setUserCollectibles } = useUserCollectibleContext();
     
     const question = collections!
         .find(collection => collection.id === form?.collectionId)
@@ -75,19 +77,19 @@ const AddDetailsScreen: React.FC = () => {
                         setLoading(true)
                         const isValid = validateAddDetails(form, errors, setErrors);
                         if (isValid) {
-                            await onSubmitCollect(form, errors, setErrors, collections!);
+                            await onSubmitCollect(
+                                form, 
+                                setForm, 
+                                errors, 
+                                setErrors, 
+                                userCollectibles!,
+                                setUserCollectibles,
+                                collections!
+                            );
                         }
-                        setForm({
-                            bonus: null,
-                            description: null,
-                            dateCollected: new Date(),
-                            collectibleId: null,
-                            collectionId: null,
-                            imageUrl: null,
-                        })
+                        
                         setLoading(false);
                         navigation.navigate('ChooseCollectible');//TODO: navigate to collected collectible
-                        //TODO: refresh APIs
                     }}
                     type={'primary'}
                 />

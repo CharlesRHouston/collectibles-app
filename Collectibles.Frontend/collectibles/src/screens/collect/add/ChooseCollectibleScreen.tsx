@@ -8,7 +8,6 @@ import {CollectStackList} from "../../../types/stackParamList";
 import SelectField, {DropdownData} from "../../../components/fields/SelectField";
 import Screen from "../../../components/Screen";
 import Section from "../../../components/Section";
-import {fontStyles} from "../../../styles/fontStyles";
 import Button from "../../../components/Button";
 import {validateChooseCollectible} from "../../../utils/validation/validateCollectForm";
 import {buttonContainerStyles} from "../../../styles/buttonStyles";
@@ -32,6 +31,7 @@ const ChooseCollectibleScreen: React.FC = () => {
         });
     }, [collections]);
     
+    //TODO: only show uncollected as options
     const getCollectibleDropdownOptions = () => {
         const collection = collections?.find(c => c.id === form.collectionId);
         
