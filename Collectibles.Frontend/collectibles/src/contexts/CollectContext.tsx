@@ -1,4 +1,5 @@
 import {createContext, useContext} from "react";
+import {CategoryType} from "../types/Collection";
 
 export type CollectForm = {
     collectionId?: string|null;

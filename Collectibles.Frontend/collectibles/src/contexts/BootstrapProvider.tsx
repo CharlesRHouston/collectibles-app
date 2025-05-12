@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {User} from "../types/User";
 import {UserContext} from "./UserContext";
 import Loading from "../components/Loading";
-import DatabaseService from "../api/DatabaseService";
+import ApiService from "../services/ApiService";
 import {Collection} from "../types/Collection";
 import {UserCollectible} from "../types/UserCollectible";
 import {CollectionContext} from "./CollectionContext";
@@ -22,9 +22,9 @@ export const BootstrapProvider: React.FC<BootstrapProviderProps> = ({ children }
         const FetchAllData = async () => {
             try {
                 const [user, collections, userCollectibles] = await Promise.all([
-                    DatabaseService.getUser(),
-                    DatabaseService.getAllCollections(),
-                    DatabaseService.getAllUserCollectibles()
+                    ApiService.getUser(),
+                    ApiService.getAllCollections(),
+                    ApiService.getAllUserCollectibles()
                 ]);
                 
                 setUser(user.data.data);

@@ -7,8 +7,8 @@ interface CollectProviderProps {
 
 export const CollectProvider: React.FC<CollectProviderProps> = ({ children }) => {
     const [collectForm, setCollectForm] = useState<CollectForm>({
-        collection: null,
-        collectible: null,
+        collectionId: null,
+        collectibleId: null,
         imageUrl: null,
         dateCollected: new Date(),
         bonus: null,
