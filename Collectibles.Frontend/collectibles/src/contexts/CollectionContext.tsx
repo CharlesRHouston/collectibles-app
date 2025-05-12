@@ -1,9 +1,9 @@
-import React, {createContext, useContext} from "react";
-import {Collection} from "../types/Collection";
+import {createContext, Dispatch, SetStateAction, useContext} from "react";
+import {Collection} from "../types/collection";
 
 export interface CollectionContextType {
     collections: Collection[] | null;
-    setCollections: React.Dispatch<React.SetStateAction<Collection[] | null>>;
+    setCollections: Dispatch<SetStateAction<Collection[] | null>>;
 }
 
 export const CollectionContext = createContext<CollectionContextType | null>(null);

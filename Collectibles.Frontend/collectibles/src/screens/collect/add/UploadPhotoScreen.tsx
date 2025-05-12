@@ -5,7 +5,8 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import Screen from "../../../components/Screen";
 import Section from "../../../components/Section";
 import Button from "../../../components/Button";
-import {CollectStackList} from "../../../types/StackParamList";
+import {CollectStackList} from "../../../types/stackParamList";
+import {buttonContainerStyles} from "../../../styles/buttonStyles";
 
 const UploadPhotoScreen: React.FC = () => {
     const navigation = useNavigation<StackNavigationProp<CollectStackList, 'UploadPhoto'>>();
@@ -15,7 +16,7 @@ const UploadPhotoScreen: React.FC = () => {
             <Section title={"Upload photo"}>
                 <></>
             </Section>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 12 }}>
+            <View style={buttonContainerStyles.multiple}>
                 <Button
                     label={"Back"}
                     onPress={() => {navigation.goBack()}}

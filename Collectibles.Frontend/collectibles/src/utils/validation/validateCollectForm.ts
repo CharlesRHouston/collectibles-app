@@ -1,4 +1,4 @@
-import {CollectForm} from "../../context/CollectContext";
+import {CollectForm} from "../../contexts/CollectContext";
 
 export const validateAddDetails = (
     form: CollectForm, 

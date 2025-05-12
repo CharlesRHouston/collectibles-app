@@ -9,18 +9,18 @@ interface SettingProps {
 
 const Setting : React.FC<SettingProps> = ({label, onPress}) => {
     return <TouchableOpacity onPress={onPress}>
-        <View style={styles.setting}>
+        <View style={styles.container}>
             <Text style={fontStyles.L2}>{label}</Text>
             <Image
                 source={require('../../assets/images/icons/Arrow - Green.png')}
-                style={{ transform: [{ rotate: '135deg' }] }}
+                style={styles.image}
             />
         </View>
     </TouchableOpacity>;
 }
 
 const styles = StyleSheet.create({
-    setting: {
+    container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     },
     icon: {
         padding: 12
+    },
+    image: {
+        transform: [{ rotate: '135deg' }]
     }
 })
 

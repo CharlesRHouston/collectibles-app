@@ -1,24 +1,36 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useCollectionContext} from "../../../contexts/CollectionContext";
 import {useCollectContext} from "../../../contexts/CollectContext";
-import {CollectStackList} from "../../../types/StackParamList";
+import {CollectStackList} from "../../../types/stackParamList";
 import SelectField, {DropdownData} from "../../../components/fields/SelectField";
 import Screen from "../../../components/Screen";
 import Section from "../../../components/Section";
 import {fontStyles} from "../../../styles/fontStyles";
 import Button from "../../../components/Button";
 import {validateChooseCollectible} from "../../../utils/validation/validateCollectForm";
+import {buttonContainerStyles} from "../../../styles/buttonStyles";
+import {errorStyles} from "../../../styles/errorStyles";
 
 
 const ChooseCollectibleScreen: React.FC = () => {
     const navigation = useNavigation<StackNavigationProp<CollectStackList, 'Collect'>>();
-
     const { collections } = useCollectionContext();
     const { form, setForm } = useCollectContext();
     const [errors, setErrors] = useState<string[]>([]);
+    
+    const collectionDropdownOptions = useMemo(() => {
+        if (!collections) return [];
+        
+        return collections.map((collection) => {
+            return {
+                label: collection.name,
+                value: collection.id,
+            } as DropdownData
+        });
+    }, [collections]);
     
     const getCollectibleDropdownOptions = () => {
         const collection = collections?.find(c => c.id === form.collectionId);
@@ -36,29 +48,38 @@ const ChooseCollectibleScreen: React.FC = () => {
     };
     
     return (
-        <Screen title={"Add to your collection"} backNavigation={false} dismissKeyboard={true}>
+        <Screen 
+            title={"Add to your collection"} 
+            backNavigation={false} 
+            dismissKeyboard={true}
+        >
             <Section title={"Choose collectible"}>
                 <SelectField
                     label={"Collection"} 
                     placeholder={"Select"}
-                    data={collections!.map((collection) => { 
-                        return {
-                            label: collection.name,
-                            value: collection.id,
-                        } as DropdownData
-                    })}
+                    data={collectionDropdownOptions}
                     value={form.collectionId!}
-                    setValue={(value) => setForm({...form, collectionId: value})}
+                    setValue={(value) => {
+                        setForm({
+                            ...form, 
+                            collectionId: value
+                        })
+                    }}
                 />
                 <SelectField
                     label={"Collectible"}
                     placeholder={"Select"}
                     data={getCollectibleDropdownOptions()}
                     value={form.collectibleId!}
-                    setValue={(value) => setForm({...form, collectibleId: value})}
+                    setValue={(value) => {
+                        setForm({
+                            ...form, 
+                            collectibleId: value
+                        })
+                    }}
                 />
             </Section>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 12 }}>
+            <View style={buttonContainerStyles.multiple}>
                 <Button 
                     label={"Cancel"} 
                     onPress={() => {
@@ -85,9 +106,9 @@ const ChooseCollectibleScreen: React.FC = () => {
                     type={'primary'} 
                 />
             </View>
-            <View style={{gap: 8, flexDirection: 'column', alignItems: 'center'}}>
+            <View style={errorStyles.container}>
                 {errors.map((error) => (
-                    <Text key={error} style={[fontStyles.L3, styles.error]}>
+                    <Text key={error} style={errorStyles.text}>
                         {error}
                     </Text>
                 ))}
@@ -99,7 +120,7 @@ const ChooseCollectibleScreen: React.FC = () => {
 const styles = StyleSheet.create({
     error: {
         color: '#2A584F'
-    },
+    }
 })
 
 export default ChooseCollectibleScreen;

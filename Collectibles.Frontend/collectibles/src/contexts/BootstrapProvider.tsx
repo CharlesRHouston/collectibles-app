@@ -1,15 +1,15 @@
-import {useEffect, useState} from "react";
-import {User} from "../types/User";
+import {ReactNode, useEffect, useState} from "react";
+import {User} from "../types/user";
 import {UserContext} from "./UserContext";
 import Loading from "../components/Loading";
-import ApiService from "../services/ApiService";
-import {Collection} from "../types/Collection";
-import {UserCollectible} from "../types/UserCollectible";
+import ApiService from "../services/apiService";
+import {Collection} from "../types/collection";
+import {UserCollectible} from "../types/userCollectible";
 import {CollectionContext} from "./CollectionContext";
 import {UserCollectibleContext} from "./UserCollectibleContext";
 
 interface BootstrapProviderProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export const BootstrapProvider: React.FC<BootstrapProviderProps> = ({ children }) => {

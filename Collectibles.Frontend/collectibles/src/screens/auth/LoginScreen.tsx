@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {View, Text, StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import TextField from "../../components/fields/TextField";
 import Button from "../../components/Button";
-import {LoginForm} from "../../types/Authentication";
+import {LoginForm} from "../../types/authentication";
 import {AuthContext} from "../../../App";
 import {onSubmitLogin} from "../../utils/auth/onSubmitLogin";
 import Screen from "../../components/Screen";
@@ -21,7 +21,11 @@ const LoginScreen: React.FC = () => {
     }
     
     return (
-        <Screen title={"Log in to your account"} backNavigation={true} dismissKeyboard={true}>
+        <Screen 
+            title={"Log in to your account"} 
+            backNavigation={true} 
+            dismissKeyboard={true}
+        >
             <View style={styles.textInputContainer}>
                 <TextField 
                     label={"Email"} 

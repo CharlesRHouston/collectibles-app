@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Button from '../../components/Button';
 import {useNavigation} from "@react-navigation/native";
-import {AuthStackList } from "../../types/StackParamList";
+import {AuthStackList } from "../../types/stackParamList";
 import type {StackNavigationProp} from "@react-navigation/stack";
 import {fontStyles} from "../../styles/fontStyles";
 import {screenStyles} from "../../components/Screen";
@@ -17,7 +17,7 @@ const WelcomeScreen: React.FC = () => {
             <Text style={fontStyles.H2}>
                 Welcome!
             </Text>
-            <View style={{ gap: 8 }}>
+            <View style={styles.buttonContainer}>
                 <Button 
                     type={'primary'} 
                     label="Sign Up" 
@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     screen: {
         justifyContent: 'center',
         gap: 48,
+    },
+    buttonContainer: {
+        gap: 8
     }
 })
 

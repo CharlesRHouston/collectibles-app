@@ -1,5 +1,5 @@
-import {AuthAction, LoginForm} from "../../types/Authentication";
-import ApiService from "../../services/ApiService";
+import {AuthAction, LoginForm} from "../../types/authentication";
+import ApiService from "../../services/apiService";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 

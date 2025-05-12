@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 import {fontStyles} from "./fontStyles";
 
-const buttonStyles = StyleSheet.create({
+const styles = StyleSheet.create({
     base: {
         borderWidth: 2,
         justifyContent: 'center',
@@ -12,19 +12,19 @@ const buttonStyles = StyleSheet.create({
     }
 });
 
-export const buttonContainerStyles = StyleSheet.create({
+export const buttonStyles = StyleSheet.create({
     primary: {
-        ...buttonStyles.base,
+        ...styles.base,
         borderColor: '#2F142F',
         backgroundColor: '#2A584F',
     },
     secondary: {
-        ...buttonStyles.base,
+        ...styles.base,
         borderColor: '#2A584F',
         backgroundColor: 'rgba(255, 255, 255, 0.6)'
     },
     tertiary: {
-        ...buttonStyles.base,
+        ...styles.base,
         backgroundColor: 'transparent',
         borderWidth: 0,
     }
@@ -44,3 +44,14 @@ export const buttonFontStyles = StyleSheet.create({
         color: '#2A584F',
     }
 });
+
+export const buttonContainerStyles = StyleSheet.create({
+    multiple: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: 12
+    },
+    single: {
+        alignItems: 'center',
+    }
+})

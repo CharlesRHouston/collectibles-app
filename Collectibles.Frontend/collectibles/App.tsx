@@ -6,7 +6,7 @@ import * as SecureStore from 'expo-secure-store';
 import {authReducer} from "./src/reducers/AuthReducer";
 import {RefreshAuthenticationTokens} from "./src/utils/auth/refreshAuthenticationTokens";
 import {ValidateAccessTokenExpiration} from "./src/utils/auth/validateAccessTokenExpiration";
-import {AuthContextType, AuthState} from "./src/types/Authentication";
+import {AuthContextType, AuthState} from "./src/types/authentication";
 import { useFonts } from 'expo-font';
 import Loading from "./src/components/Loading";
 import {BootstrapProvider} from "./src/contexts/BootstrapProvider";

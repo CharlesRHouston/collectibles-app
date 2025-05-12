@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import Loading from "../../components/Loading";
 import TextField from "../../components/fields/TextField";
 import Screen from "../../components/Screen";
 import Button from "../../components/Button";
-import ApiService from "../../services/ApiService";
+import ApiService from "../../services/apiService";
 import {ValidateConfirmPassword, ValidatePassword} from "../../utils/validation/validatePassword";
-import {PasswordForm, SignupForm} from "../../types/Authentication";
+import {PasswordForm, SignupForm} from "../../types/authentication";
 import {useNavigation} from "@react-navigation/native";
+import {buttonContainerStyles} from "../../styles/buttonStyles";
 
 const ChangePasswordScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -22,8 +23,12 @@ const ChangePasswordScreen: React.FC = () => {
         {
             loading &&  <Loading />
         }
-        <Screen title="Change Password " backNavigation={true} dismissKeyboard={true}>
-            <View style={{width: '100%', gap: 8}} >
+        <Screen 
+            title="Change Password" 
+            backNavigation={true} 
+            dismissKeyboard={true}
+        >
+            <View style={styles.inputContainer} >
                 <TextField
                     label={"New password"}
                     value={passwordForm.password.value}
@@ -55,7 +60,7 @@ const ChangePasswordScreen: React.FC = () => {
                     errors={passwordForm.confirmPassword.errors}
                 />
             </View>
-            <View style={{alignItems: 'center'}}>
+            <View style={buttonContainerStyles.single}>
                 <Button
                     label="Change Password"
                     type="primary"
@@ -72,5 +77,12 @@ const ChangePasswordScreen: React.FC = () => {
         </Screen>
     </>)
 }
+
+const styles = StyleSheet.create({
+    inputContainer: {
+        width: '100%', 
+        gap: 8
+    }
+});
 
 export default ChangePasswordScreen;

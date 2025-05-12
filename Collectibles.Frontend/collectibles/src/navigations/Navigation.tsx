@@ -10,7 +10,7 @@ import {
     CollectStackList,
     HomeStackList, MainStackList,
     SettingsStackList
-} from "../types/StackParamList";
+} from "../types/stackParamList";
 import CollectibleDetailScreen from "../screens/home/CollectibleDetailScreen";
 import CollectibleLogScreen from "../screens/home/CollectibleLogScreen";
 import HomeScreen from "../screens/home/HomeScreen";
@@ -137,17 +137,8 @@ export function MainStack() {
                     },
                     tabBarActiveTintColor: '#FCFFC0',
                     tabBarInactiveTintColor: '#FCFFC0',
-                    tabBarStyle: {
-                        backgroundColor: '#774448',
-                        borderTopWidth: 0,
-                        elevation: 0,
-                        height: 104,
-                        paddingTop: 24
-                    },
-                    tabBarLabelStyle: {
-                        ...fontStyles.L4,
-                        fontSize: 14
-                    }
+                    tabBarStyle: styles.tabBar,
+                    tabBarLabelStyle: styles.tabBarLabel
                 })
                 }
             >
@@ -185,5 +176,16 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 80,
         zIndex: 999,
+    },
+    tabBar: {
+        backgroundColor: '#774448',
+        borderTopWidth: 0,
+        elevation: 0,
+        height: 104,
+        paddingTop: 24
+    },
+    tabBarLabel: {
+        ...fontStyles.L4,
+        fontSize: 14
     }
 });

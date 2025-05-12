@@ -5,14 +5,12 @@ import {
     Text,
     View,
     KeyboardAvoidingView,
-    Platform,
-    TouchableWithoutFeedback,
-    Keyboard,
+    Platform
 } from 'react-native';
 import {fontStyles} from "../../styles/fontStyles";
 import TextField from "../../components/fields/TextField";
 import Button from "../../components/Button";
-import {SignupForm} from "../../types/Authentication";
+import {SignupForm} from "../../types/authentication";
 import {AuthContext} from "../../../App";
 import {onSubmitSignup} from "../../utils/auth/onSubmitSignup";
 import {ValidateConfirmPassword, ValidatePassword} from "../../utils/validation/validatePassword";
@@ -37,14 +35,14 @@ const SignupScreen: React.FC = () => {
         }
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={{ flex: 1 }}
+            style={styles.keyboardAvoidingView}
         >
             <Screen title={"Create a new account"} backNavigation={true} dismissKeyboard={true}>
                 <ScrollView 
                     contentContainerStyle={{gap: 32}}
-                    style={{width: '100%'}}
+                    style={styles.scrollView}
                 >
-                    <View style={{ gap: 8, flexDirection: 'column', justifyContent: 'center' }}>
+                    <View style={styles.inputContainer}>
                         <TextField
                             label={"Username"}
                             value={signupForm.username.value}
@@ -89,7 +87,7 @@ const SignupScreen: React.FC = () => {
                             }
                             }/>
                         {signupForm.apiErrors.map((error) => (
-                            <Text key={error} style={[fontStyles.L3, styles.error]}>
+                            <Text key={error} style={styles.error}>
                                 {error}
                             </Text>
                         ))}
@@ -101,26 +99,21 @@ const SignupScreen: React.FC = () => {
 }
 
 const styles = StyleSheet.create({
-    contentContainer: {
-        flex: 1,
-        height: '100%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: '#6EB8A8',
-        paddingTop: 56,
-        paddingHorizontal: 16,
-        gap: 32
-    },
-    textInputContainer: {
-        gap: 8,
-        alignItems: 'stretch',
-        width: '100%',
-        paddingHorizontal: 16,
-    },
     error: {
+        ...fontStyles.L3,
         color: '#2A584F'
     },
+    inputContainer: { 
+        gap: 8, 
+        flexDirection: 'column', 
+        justifyContent: 'center' 
+    },
+    keyboardAvoidingView: {
+        flex: 1,
+    },
+    scrollView: {
+        width: '100%'
+    }
 })
 
 export default SignupScreen;

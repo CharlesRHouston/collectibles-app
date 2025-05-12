@@ -1,4 +1,4 @@
-import {FieldState, PasswordForm, SignupForm} from "../../types/Authentication";
+import {FieldState, PasswordForm, SignupForm} from "../../types/authentication";
 import React from "react";
 
 export const ValidatePassword = <T extends PasswordForm>(

@@ -1,15 +1,16 @@
 import {
     AuthAction,
     SignupForm
-} from "../../types/Authentication";
+} from "../../types/authentication";
 import axios, {AxiosResponse} from "axios";
 import * as SecureStore from "expo-secure-store";
-import AuthenticationService from "../../services/AuthenticationService";
+import AuthenticationService from "../../services/authenticationService";
+import {Dispatch, SetStateAction} from "react";
 
 export const onSubmitSignup = async (
     signupForm: SignupForm,
-    setSignupForm: React.Dispatch<React.SetStateAction<SignupForm>>,
-    dispatch: React.Dispatch<AuthAction>
+    setSignupForm: Dispatch<SetStateAction<SignupForm>>,
+    dispatch: Dispatch<AuthAction>
 ) : Promise<void> => {
     try {
         const response = await AuthenticationService.signup({

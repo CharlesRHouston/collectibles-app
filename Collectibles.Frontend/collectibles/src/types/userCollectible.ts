@@ -1,20 +1,22 @@
-import {CategoryType} from "./Collection";
+import {CategoryType} from "./collection";
 
 export interface UserCollectible {
     collectibleId: string;
-    active?: boolean;
+    active: boolean;
     description: string;
     collectedAt: string;
     imageUrl: string;
-    bonusAchieved?: boolean;
+    bonusAchieved: boolean;
     collectionId: string;
+    categoryType: CategoryType;
 }
 
 export interface PutCollectibleRequest {
-    active?: boolean;
+    active: boolean;
     description: string;
     collectedAt: string;
     imageUrl: string;
-    bonusAchieved?: boolean;
+    bonusAchieved: boolean;
     collectionId: string;
+    categoryType: CategoryType;
 }

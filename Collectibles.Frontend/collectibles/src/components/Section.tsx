@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {fontStyles} from "../styles/fontStyles";
 
 interface SectionProps {
@@ -9,15 +9,26 @@ interface SectionProps {
 
 const Section : React.FC<SectionProps> = ({title, children}) => {
     
-    return (<View style={{ width: '100%', gap: 16 }}>
+    return (<View style={styles.container}>
         <View>
             <Text style={[fontStyles.L2, {color: '#2A584F'}]}>
                 {title}
             </Text>
-            <View style={{ height: 1, backgroundColor: '#2A584F', marginVertical: 4 }} />
+            <View style={styles.line} />
         </View>
         {children}
     </View>)
 }
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%', gap: 16
+    },
+    line: {
+        height: 1, 
+        backgroundColor: '#2A584F', 
+        marginVertical: 4
+    }
+})
 
 export default Section;

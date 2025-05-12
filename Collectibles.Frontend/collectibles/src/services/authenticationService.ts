@@ -1,5 +1,10 @@
-import {AuthenticationResponse, LoginRequest, RefreshRequest, SignupRequest} from "../types/Authentication";
-import {HttpRequest, HttpResponse} from "../types/Api";
+import {
+    AuthenticationResponse, 
+    LoginRequest, 
+    RefreshRequest, 
+    SignupRequest
+} from "../types/authentication";
+import {HttpRequest, HttpResponse} from "../types/api";
 import axios, {AxiosInstance, AxiosResponse} from "axios";
 
 interface IAuthenticationService {

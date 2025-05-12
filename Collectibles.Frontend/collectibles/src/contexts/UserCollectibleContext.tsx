@@ -1,9 +1,9 @@
-import React, {createContext, useContext} from "react";
-import {UserCollectible} from "../types/UserCollectible";
+import {createContext, Dispatch, SetStateAction, useContext} from "react";
+import {UserCollectible} from "../types/userCollectible";
 
 export interface UserCollectibleContextType {
     userCollectibles: UserCollectible[] | null;
-    setUserCollectibles: React.Dispatch<React.SetStateAction<UserCollectible[] | null>>;
+    setUserCollectibles: Dispatch<SetStateAction<UserCollectible[] | null>>;
 }
 
 export const UserCollectibleContext = createContext<UserCollectibleContextType | null>(null);

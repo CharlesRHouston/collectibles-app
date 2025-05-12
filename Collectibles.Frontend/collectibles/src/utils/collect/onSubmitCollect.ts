@@ -1,7 +1,24 @@
-import ApiService from "../../services/ApiService";
+import ApiService from "../../services/apiService";
 import axios from "axios";
-import {CollectForm} from "../../context/CollectContext";
-import {CategoryType} from "../../types/Collection";
+import {CollectForm} from "../../contexts/CollectContext";
+import {useCollectionContext} from "../../contexts/CollectionContext";
+
+const getCategoryType = (
+    collectionId: string, 
+    collectibleId: string
+) => {
+    const { collections } = useCollectionContext();
+    
+    const collection = collections!.find(
+        collection => collection.id === collectionId
+    );
+
+    for (const category of collection!.categories) {
+        if (category.collectibles.find(c => c.id === collectibleId)) {
+            return category.type;
+        }
+    }
+}
 
 export const onSubmitCollect = async (
     form: CollectForm, 
@@ -15,9 +32,10 @@ export const onSubmitCollect = async (
                 collectedAt: form.dateCollected!.toISOString(),
                 active: true,
                 description: form.description!,
-                bonusAchieved: form.bonus ?? false,
+                bonusAchieved: form.bonus!,
                 imageUrl: form.imageUrl ?? "placeholder",
                 collectionId: form.collectionId!,
+                categoryType: getCategoryType(form.collectionId!, form.collectibleId!)!
             }
         )
 

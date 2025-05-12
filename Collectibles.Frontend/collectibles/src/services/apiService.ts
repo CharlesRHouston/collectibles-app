@@ -1,11 +1,11 @@
 import axios, {AxiosError, AxiosInstance, AxiosResponse} from "axios";
 import * as SecureStore from "expo-secure-store";
-import AuthenticationService from "./AuthenticationService";
-import {HttpResponse} from "../types/Api";
-import {GetUserResponse, UpdateUserRequest} from "../types/User";
-import {RefreshRequest} from "../types/Authentication";
-import {Collection} from "../types/Collection";
-import {PutCollectibleRequest, UserCollectible} from "../types/UserCollectible";
+import AuthenticationService from "./authenticationService";
+import {HttpResponse} from "../types/api";
+import {GetUserResponse, UpdateUserRequest} from "../types/user";
+import {RefreshRequest} from "../types/authentication";
+import {Collection} from "../types/collection";
+import {PutCollectibleRequest, UserCollectible} from "../types/userCollectible";
 
 interface IDataBaseService {
     logout(request : RefreshRequest): Promise<AxiosResponse>;

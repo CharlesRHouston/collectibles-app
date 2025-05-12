@@ -4,7 +4,7 @@ import Screen from "../../../components/Screen";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useCollectContext} from "../../../contexts/CollectContext";
-import {CollectStackList} from "../../../types/StackParamList";
+import {CollectStackList} from "../../../types/stackParamList";
 import Section from "../../../components/Section";
 import DateField from "../../../components/fields/DateField";
 import TextAreaField from "../../../components/fields/TextAreaField";
@@ -15,6 +15,8 @@ import {onSubmitCollect} from "../../../utils/collect/onSubmitCollect";
 import {validateAddDetails} from "../../../utils/validation/validateCollectForm";
 import Loading from "../../../components/Loading";
 import {useCollectionContext} from "../../../contexts/CollectionContext";
+import {buttonContainerStyles, buttonStyles} from "../../../styles/buttonStyles";
+import {errorStyles} from "../../../styles/errorStyles";
 
 const AddDetailsScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -34,7 +36,11 @@ const AddDetailsScreen: React.FC = () => {
         {
             loading &&  <Loading />
         }
-        <Screen title={"Add to your collection"} backNavigation={false} dismissKeyboard={true}>
+        <Screen 
+            title={"Add to your collection"} 
+            backNavigation={false} 
+            dismissKeyboard={true}
+        >
             <Section title={"Add details"}>
                 <DateField
                     label={"Date Collected"}
@@ -56,7 +62,7 @@ const AddDetailsScreen: React.FC = () => {
                         />
                 }
             </Section>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 12 }}>
+            <View style={buttonContainerStyles.multiple}>
                 <Button
                     label={"Back"}
                     onPress={() => {navigation.goBack()}}
@@ -84,9 +90,9 @@ const AddDetailsScreen: React.FC = () => {
                     type={'primary'}
                 />
             </View>
-            <View style={{gap: 8, flexDirection: 'column', alignItems: 'center'}}>
+            <View style={errorStyles.container}>
                 {errors.map((error) => (
-                    <Text key={error} style={[fontStyles.L3, styles.error]}>
+                    <Text key={error} style={errorStyles.text}>
                         {error}
                     </Text>
                 ))}
@@ -94,11 +100,5 @@ const AddDetailsScreen: React.FC = () => {
         </Screen>
     </>)
 }
-
-const styles = StyleSheet.create({
-    error: {
-        color: '#2A584F'
-    },
-})
 
 export default AddDetailsScreen;
