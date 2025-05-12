@@ -18,4 +18,5 @@ public class PutCollectibleRequest
     public DateTime CollectedAt { get; set; }
     public string ImageUrl { get; set; }
     public bool? BonusAchieved { get; set; }
+    public string CollectionId { get; set; }
 }

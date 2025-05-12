@@ -1,7 +1,7 @@
 import {AuthAction, LoginForm} from "../../types/Authentication";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
-import AuthenticationService from "../../api/AuthenticationService";
+import AuthenticationService from "../../services/AuthenticationService";
 
 export const onSubmitLogin = async (
         loginForm: LoginForm,

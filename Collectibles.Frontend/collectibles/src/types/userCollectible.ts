@@ -1,3 +1,5 @@
+import {CategoryType} from "./Collection";
+
 export interface UserCollectible {
     collectibleId: string;
     active?: boolean;
@@ -5,6 +7,7 @@ export interface UserCollectible {
     collectedAt: string;
     imageUrl: string;
     bonusAchieved?: boolean;
+    collectionId: string;
 }
 
 export interface PutCollectibleRequest {
@@ -13,4 +16,5 @@ export interface PutCollectibleRequest {
     collectedAt: string;
     imageUrl: string;
     bonusAchieved?: boolean;
+    collectionId: string;
 }

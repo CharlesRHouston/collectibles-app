@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {useCollectionContext} from "../../../context/CollectionContext";
-import {useCollectContext} from "../../../context/CollectContext";
+import {useCollectionContext} from "../../../contexts/CollectionContext";
+import {useCollectContext} from "../../../contexts/CollectContext";
 import {CollectStackList} from "../../../types/StackParamList";
 import SelectField, {DropdownData} from "../../../components/fields/SelectField";
 import Screen from "../../../components/Screen";
@@ -61,7 +61,17 @@ const ChooseCollectibleScreen: React.FC = () => {
             <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 12 }}>
                 <Button 
                     label={"Cancel"} 
-                    onPress={() => {navigation.goBack()}} 
+                    onPress={() => {
+                        setForm({
+                            bonus: null,
+                            description: null,
+                            dateCollected: new Date(),
+                            collectibleId: null,
+                            collectionId: null,
+                            imageUrl: null,
+                        });
+                        navigation.goBack();
+                    }} 
                     type={'secondary'} 
                 />
                 <Button 

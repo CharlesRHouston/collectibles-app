@@ -1,6 +1,7 @@
-import DatabaseService from "../../api/DatabaseService";
+import ApiService from "../../services/ApiService";
 import axios from "axios";
 import {CollectForm} from "../../context/CollectContext";
+import {CategoryType} from "../../types/Collection";
 
 export const onSubmitCollect = async (
     form: CollectForm, 
@@ -8,7 +9,7 @@ export const onSubmitCollect = async (
     setErrors:  React.Dispatch<React.SetStateAction<string[]>>
 ) => {
     try {
-        await DatabaseService.putCollectible(
+        await ApiService.putCollectible(
             form.collectibleId!,
             {
                 collectedAt: form.dateCollected!.toISOString(),
@@ -16,6 +17,7 @@ export const onSubmitCollect = async (
                 description: form.description!,
                 bonusAchieved: form.bonus ?? false,
                 imageUrl: form.imageUrl ?? "placeholder",
+                collectionId: form.collectionId!,
             }
         )
 

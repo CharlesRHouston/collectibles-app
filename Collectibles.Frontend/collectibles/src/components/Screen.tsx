@@ -4,21 +4,21 @@ import React from "react";
 import BackArrow from "./BackArrow";
 
 interface ScreenProps {
-    title: string;
-    backNavigation: boolean;
+    title?: string | null;
+    backNavigation?: boolean | null;
     children: React.ReactNode;
     dismissKeyboard?: boolean;
 }
 
-const Screen : React.FC<ScreenProps> = ({title, backNavigation, children, dismissKeyboard=false}) => {
+const Screen : React.FC<ScreenProps> = ({title=null, backNavigation=false, children, dismissKeyboard=false}) => {
     const screen = <View style={backNavigation ?
         screenStyles.containerWithNavigation :
         screenStyles.containerWithoutNavigation
     }>
         {backNavigation && <BackArrow />}
-        <Text style={fontStyles.H3}>
+        {title && <Text style={fontStyles.H3}>
             {title}
-        </Text>
+        </Text>}
         {children}
     </View>;
     
@@ -41,7 +41,7 @@ const baseStyles = StyleSheet.create({
         backgroundColor: '#6EB8A8',
         paddingHorizontal: 16,
         gap: 24,
-        width: '100%',
+        width: '100%'
     }
 })
 export const screenStyles = StyleSheet.create({

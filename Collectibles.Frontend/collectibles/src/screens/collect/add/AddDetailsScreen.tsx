@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Screen from "../../../components/Screen";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {useCollectContext} from "../../../context/CollectContext";
+import {useCollectContext} from "../../../contexts/CollectContext";
 import {CollectStackList} from "../../../types/StackParamList";
 import Section from "../../../components/Section";
 import DateField from "../../../components/fields/DateField";
@@ -14,7 +14,7 @@ import {fontStyles} from "../../../styles/fontStyles";
 import {onSubmitCollect} from "../../../utils/collect/onSubmitCollect";
 import {validateAddDetails} from "../../../utils/validation/validateCollectForm";
 import Loading from "../../../components/Loading";
-import {useCollectionContext} from "../../../context/CollectionContext";
+import {useCollectionContext} from "../../../contexts/CollectionContext";
 
 const AddDetailsScreen: React.FC = () => {
     const [loading, setLoading] = useState(false);

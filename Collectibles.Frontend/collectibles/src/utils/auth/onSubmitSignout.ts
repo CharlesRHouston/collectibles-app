@@ -1,5 +1,5 @@
 import {AuthAction, LoginForm} from "../../types/Authentication";
-import DatabaseService from "../../api/DatabaseService";
+import ApiService from "../../services/ApiService";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ export const onSubmitSignout = async (
 ) : Promise<void> => {
     try {
         setLoading(true);
-        await DatabaseService.logout({
+        await ApiService.logout({
             refreshToken: await SecureStore.getItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY)
         })
     } catch (error) {

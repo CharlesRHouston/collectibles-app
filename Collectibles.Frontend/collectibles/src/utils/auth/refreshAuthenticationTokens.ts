@@ -2,7 +2,7 @@ import {AuthAction, AuthenticationResponse, RefreshRequest} from "../../types/Au
 import * as SecureStore from "expo-secure-store";
 import axios, {AxiosResponse} from "axios";
 import React from "react";
-import AuthenticationService from "../../api/AuthenticationService";
+import AuthenticationService from "../../services/AuthenticationService";
 
 export const RefreshAuthenticationTokens = async (dispatch:  React.Dispatch<AuthAction>, refreshToken: string) => {
     try {
