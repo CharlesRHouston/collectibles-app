@@ -33,7 +33,7 @@ const CollectionListItem: React.FC<CollectionListItemProps> = ({ label, imagePat
     return <View style={styles.container}>
         <View style={styles.nameContainer}>
             <Image source={imagePath} />
-            <Text style={fontStyles.H4}>{label.toUpperCase()}</Text>
+            <Text style={fontStyles.H5}>{label.toUpperCase()}</Text>
         </View>
         <Text style={fontStyles.H5}>{collectionScore}/{collectionTotal}</Text>
     </View>

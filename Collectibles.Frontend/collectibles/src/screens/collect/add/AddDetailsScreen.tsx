@@ -57,7 +57,7 @@ const AddDetailsScreen: React.FC = () => {
                 {
                     question !== null &&
                         <RadioField 
-                            label={"Bonus gem: did you take a swim?"} 
+                            label={`Bonus gem: ${question?.toLowerCase()}`} 
                             value={form.bonus} 
                             setValue={(value) => setForm({...form, bonus: value})} 
                             optionOneText={"Yes"} 

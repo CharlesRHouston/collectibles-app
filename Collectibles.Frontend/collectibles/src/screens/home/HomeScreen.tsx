@@ -73,7 +73,7 @@ const HomeScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
     collectionHeading: {
-        ...fontStyles.H3,
+        ...fontStyles.H4,
         alignSelf: 'flex-start'
     },
     screen: {

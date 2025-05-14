@@ -9,7 +9,6 @@ type Props = StackScreenProps<HomeStackList, 'Collection'>;
 const CollectionScreen: React.FC<Props> = ({ route }) => {
     const { collection } = route.params;
     
-    
     return (
         <Screen 
             title={collection.name.toUpperCase()} 
