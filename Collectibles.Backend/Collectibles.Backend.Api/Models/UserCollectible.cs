@@ -5,6 +5,7 @@ public class UserCollectible
     public Guid UserId { get; set; }
     public string CollectibleId { get; set; }
     public string CollectionId { get; set; }
+    public string CategoryId { get; set; }
     public bool? Active { get; set; }
     public string Description { get; set; }
     public DateTime CollectedAt { get; set; }
@@ -16,6 +17,7 @@ public class UserCollectible
 public class PutCollectibleRequest
 {
     public string CollectionId { get; set; }
+    public string CategoryId { get; set; }
     public bool? Active { get; set; }
     public string Description { get; set; }
     public DateTime CollectedAt { get; set; }

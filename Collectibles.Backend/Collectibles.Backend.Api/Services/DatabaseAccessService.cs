@@ -259,6 +259,7 @@ public class DatabaseAccessService : IDatabaseAccessService
                 { "userId", new AttributeValue { S = userId.ToString() } },
                 { "collectibleId", new AttributeValue { S = collectibleId } },
                 { "collectionId", new AttributeValue { S = collectible.CollectionId } },
+                { "categoryId", new AttributeValue { S = collectible.CategoryId } },
                 { "active", new AttributeValue { BOOL = collectible.Active } },
                 { "description", new AttributeValue { S = collectible.Description } },
                 { "collectedAt", new AttributeValue { S = collectible.CollectedAt.ToString(CultureInfo.InvariantCulture) }},

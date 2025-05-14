@@ -15,6 +15,7 @@ public static class UserCollectibleHelper
             {
                 UserId = Guid.Parse(item["userId"].S),
                 CollectibleId = item["collectibleId"].S,
+                CategoryId = item["categoryId"].S,
                 CollectionId = item["collectionId"].S,
                 Active = item["active"].BOOL,
                 Description = item["description"].S,
