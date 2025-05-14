@@ -3,13 +3,14 @@ import {useNavigation} from '@react-navigation/native';
 import type {StackNavigationProp} from '@react-navigation/stack';
 import {HomeStackList} from '../../types/stackParamList';
 import {screenStyles} from "../../components/Screen";
-import {StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {fontStyles} from "../../styles/fontStyles";
 import {useCollectionContext} from "../../contexts/CollectionContext";
 import {CategoryType} from "../../types/collection";
 import CategoryTypeScore from "../../components/home/CategoryTypeScore";
 import CollectionListItem from "../../components/home/CollectionListItem";
 import TotalScore from "../../components/home/TotalScore";
+
 type HomeScreenNavProp = StackNavigationProp<HomeStackList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
@@ -18,6 +19,14 @@ const HomeScreen: React.FC = () => {
     
     return (<>
         <View style={styles.screen}>
+            <Image
+                style={styles.cloudOne}
+                source={require('../../../assets/images/environment/Cloud - 1.png')}
+            />
+            <Image
+                style={styles.cloudTwo}
+                source={require('../../../assets/images/environment/Cloud - 2.png')}
+            />
             <TotalScore />
             <View style={{ flexDirection: 'row', gap: 24}}>
                 <CategoryTypeScore 
@@ -36,19 +45,23 @@ const HomeScreen: React.FC = () => {
                     category={CategoryType.FoodAndCulture}
                 />
             </View>
-            <View style={{ width: '100%', gap: 8}}>
-                <Text style={styles.collectionHeading}>COLLECTIONS</Text>
+            <View style={{ width: '100%', gap: 12}}>
+                <Text style={styles.collectionHeading}>MY COLLECTIONS</Text>
                 <View>
                     {
                         collections &&
                             collections.map(collection => {
                                 return (
-                                    <CollectionListItem 
+                                    <TouchableOpacity 
                                         key={collection.id}
-                                        label={collection.name}
-                                        imagePath={require(`../../../assets/images/flags/South Africa.png`)}
-                                        collectionId={collection.id}
-                                    />
+                                        onPress={() => navigation.navigate('Collection', { collection })}
+                                    >
+                                        <CollectionListItem
+                                            label={collection.name}
+                                            imagePath={require('../../../assets/images/flags/South Africa.png')}
+                                            collectionId={collection.id}
+                                        />
+                                    </TouchableOpacity>
                                 )
                             })
                     }
@@ -65,8 +78,18 @@ const styles = StyleSheet.create({
     },
     screen: {
         ...screenStyles.containerWithoutNavigation, 
-        paddingTop: 160, 
-        gap: 32
+        paddingTop: 176, 
+        gap: 32,
+    },
+    cloudOne: {
+        position: 'absolute',
+        top: 66,
+        left: -70,
+    },
+    cloudTwo: {
+        position: 'absolute',
+        top: 40,
+        right: -70,
     }
 })
 

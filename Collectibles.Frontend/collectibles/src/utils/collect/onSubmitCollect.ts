@@ -8,17 +8,14 @@ import {Dispatch, SetStateAction} from "react";
 const getCategoryType = (
     collections: Collection[],
     collectionId: string, 
-    collectibleId: string
+    categoryId: string
 ) => {
-    const collection = collections!.find(
-        collection => collection.id === collectionId
-    );
+    const category = collections!
+        .find(collection => collection.id === collectionId)!
+        .categories
+        .find(category => category.id === categoryId)!;
 
-    for (const category of collection!.categories) {
-        if (category.collectibles.find(c => c.id === collectibleId)) {
-            return category.type;
-        }
-    }
+    return category.type;
 }
 
 export const onSubmitCollect = async (
@@ -33,12 +30,13 @@ export const onSubmitCollect = async (
     try {
         const request = {
             collectionId: form.collectionId!,
+            categoryId: form.categoryId!,
             collectedAt: form.dateCollected!.toISOString(),
             active: true,
             description: form.description!,
             bonusAchieved: form.bonus!,
             imageUrl: form.imageUrl ?? "placeholder",
-            categoryType: getCategoryType(collections, form.collectionId!, form.collectibleId!)!
+            categoryType: getCategoryType(collections, form.collectionId!, form.categoryId!)!
         }
         
         await ApiService.putCollectible(
@@ -56,6 +54,7 @@ export const onSubmitCollect = async (
 
         setForm({
             collectionId: null,
+            categoryId: null,
             collectibleId: null,
             imageUrl: null,
             dateCollected: new Date(),

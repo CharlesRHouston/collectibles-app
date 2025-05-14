@@ -2,6 +2,7 @@ import {createContext, useContext} from "react";
 
 export type CollectForm = {
     collectionId?: string|null;
+    categoryId?: string|null;
     collectibleId?: string|null;
     imageUrl?: string|null;
     dateCollected?: Date|null;

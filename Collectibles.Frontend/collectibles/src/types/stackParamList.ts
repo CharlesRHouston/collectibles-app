@@ -1,3 +1,5 @@
+import {Collectible, Collection} from "./collection";
+
 export type AuthStackList = {
   'AuthStack': undefined;
   'Welcome': undefined;
@@ -8,8 +10,8 @@ export type AuthStackList = {
 export type HomeStackList = {
   'HomeStack': undefined;
   'Home': undefined;
-  'Collection': undefined;
-  'CollectibleClue': undefined;
+  'Collection': { collection: Collection };
+  'CollectibleClue': { collectible: Collectible };
   'CollectibleStack': undefined;
 };
 

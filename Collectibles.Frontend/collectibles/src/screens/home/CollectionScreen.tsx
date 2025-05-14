@@ -1,12 +1,30 @@
 import React from 'react';
-import { Text } from 'react-native';
+import {type StackNavigationProp, StackScreenProps} from "@react-navigation/stack";
+import {HomeStackList} from "../../types/stackParamList";
+import Screen from "../../components/Screen";
+import CategoryListItem from "../../components/collection/CategoryListItem";
 
-const CollectionScreen: React.FC = () => {
-  return (
-    <Text>
-      Welcome to the collection screen.
-    </Text>
-  )
+type Props = StackScreenProps<HomeStackList, 'Collection'>;
+
+const CollectionScreen: React.FC<Props> = ({ route }) => {
+    const { collection } = route.params;
+    
+    
+    return (
+        <Screen 
+            title={collection.name.toUpperCase()} 
+            backNavigation={true} 
+            dismissKeyboard={false} 
+        >
+            {
+                collection.categories.map((category) => (
+                    <CategoryListItem 
+                        category={category} 
+                    />
+                ))
+            }
+        </Screen>
+    )
 }
 
 export default CollectionScreen;

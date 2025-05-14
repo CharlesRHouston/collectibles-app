@@ -33,23 +33,38 @@ const ChooseCollectibleScreen: React.FC = () => {
     
     //TODO: only show uncollected as options
     const getCollectibleDropdownOptions = () => {
-        const collection = collections?.find(c => c.id === form.collectionId);
+        const category = collections
+            ?.find(c => c.id === form.collectionId)
+            ?.categories
+            ?.find(c => c.id === form.categoryId);
         
+        if (!category) return [];
+        
+        return category.collectibles.map(collectible => {
+            return {
+                label: collectible.name,
+                value: collectible.id,
+            } as DropdownData
+        })
+    };
+
+    const getCategoryDropdownOptions = () => {
+        const collection = collections
+            ?.find(c => c.id === form.collectionId);
+
         if (!collection) return [];
-        
-        return collection.categories.flatMap(category => {
-            return category.collectibles.map(collectible => {
-                return {
-                    label: collectible.name,
-                    value: collectible.id,
-                } as DropdownData
-            })
+
+        return collection.categories.map(category => {
+            return {
+                label: category.name,
+                value: category.id,
+            } as DropdownData
         })
     };
     
     return (
         <Screen 
-            title={"Add to your collection"} 
+            title={"Add to a collection"} 
             backNavigation={false} 
             dismissKeyboard={true}
         >
@@ -63,6 +78,18 @@ const ChooseCollectibleScreen: React.FC = () => {
                         setForm({
                             ...form, 
                             collectionId: value
+                        })
+                    }}
+                />
+                <SelectField
+                    label={"Category"} 
+                    placeholder={"Select"}
+                    data={getCategoryDropdownOptions()}
+                    value={form.categoryId!}
+                    setValue={(value) => {
+                        setForm({
+                            ...form, 
+                            categoryId: value
                         })
                     }}
                 />
