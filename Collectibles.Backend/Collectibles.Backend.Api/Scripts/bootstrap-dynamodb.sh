@@ -137,7 +137,7 @@ aws dynamodb put-item \
                     }
                   },
                   "pixelArtFilename": {
-                    "S": "beach.png"
+                    "S": "muizenburg.png"
                   }
                 }
               },
@@ -163,7 +163,7 @@ aws dynamodb put-item \
                     }
                   },
                   "pixelArtFilename": {
-                    "S": "beach.png"
+                    "S": "camps-bay.png"
                   }
                 }
               },
@@ -189,7 +189,7 @@ aws dynamodb put-item \
                     }
                   },
                   "pixelArtFilename": {
-                    "S": "beach.png"
+                    "S": "boulders-beach.png"
                   }
                 }
               },
@@ -215,7 +215,7 @@ aws dynamodb put-item \
                     }
                   },
                   "pixelArtFilename": {
-                    "S": "beach.png"
+                    "S": "clifton.png"
                   }
                 }
               },
@@ -241,7 +241,7 @@ aws dynamodb put-item \
                     }
                   },
                   "pixelArtFilename": {
-                    "S": "beach.png"
+                    "S": "bloubergstrand.png"
                   }
                 }
               }
