@@ -18,6 +18,7 @@ const CollectionScreen: React.FC<Props> = ({ route }) => {
             {
                 collection.categories.map((category) => (
                     <CategoryListItem 
+                        key={category.id}
                         category={category} 
                     />
                 ))

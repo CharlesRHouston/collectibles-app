@@ -12,10 +12,8 @@ interface CategoryListItemProps {
     category: Category
 }
 
-type CollectScreenNavProp = StackNavigationProp<HomeStackList, 'Collection'>;
-
 const CategoryListItem : FC<CategoryListItemProps> = ({ category }) => {
-    const navigation = useNavigation<CollectScreenNavProp>();
+    
     const { userCollectibles } = useUserCollectibleContext();
     
     const categoryScore = useMemo(() => {
@@ -42,27 +40,25 @@ const CategoryListItem : FC<CategoryListItemProps> = ({ category }) => {
                 />
             </View>
         </View>
-        <ScrollView 
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={styles.collectibleContainer}
-        >
-            {
-                category.collectibles.map(collectible => {
-                    return (
-                        <TouchableOpacity
-                            key={collectible.id}
-                            onPress={() => navigation.navigate('CollectibleClue', { collectible })}
-                        >
+        <View style={styles.collectibleViewContainer}>
+            <ScrollView 
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={styles.collectibleScrollContainer}
+                contentContainerStyle={styles.collectibleContentContainer}
+            >
+                {
+                    category.collectibles.map(collectible => {
+                        return (
                             <CollectibleListItem 
                                 key={collectible.id} 
                                 collectible={collectible} 
                             />
-                        </TouchableOpacity>
-                    )
-                })
-            }
-        </ScrollView>
+                        )
+                    })
+                }
+            </ScrollView>
+        </View>
     </View>)
 }
 
@@ -78,12 +74,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
     },
-    collectibleContainer: {
-        flexDirection: 'row',
-        gap: 16,
-        marginHorizontal: -16,
-        paddingLeft: 16,
-    },
     scoreContainer: {
         flexDirection: 'row',
         alignItems: "center",
@@ -91,6 +81,16 @@ const styles = StyleSheet.create({
     },
     score: {
         ...fontStyles.H5
+    },
+    collectibleViewContainer: {
+        flexDirection: 'row',
+    },
+    collectibleScrollContainer: {
+        marginHorizontal: -16, 
+        paddingLeft: 8
+    },
+    collectibleContentContainer: {
+        gap: 0
     }
 });
 
