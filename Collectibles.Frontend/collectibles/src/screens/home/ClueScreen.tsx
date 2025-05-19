@@ -24,7 +24,7 @@ const ClueScreen: React.FC<Props> = ({ route }) => {
                 {
                     collectible?.bonus?.description &&
                     <View style={styles.subContainer}>
-                        <Image source={require("../../../assets/images/icons/Trophy.png")} />
+                        <Image source={require("../../../assets/images/icons/Trophy - Active.png")} />
                         <Text style={styles.text}>{collectible.bonus.description}</Text>
                     </View>
                 }
