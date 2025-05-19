@@ -2,7 +2,6 @@ import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from "react
 import {Collectible} from "../../types/collection";
 import {fontStyles} from "../../styles/fontStyles";
 import {useUserCollectibleContext} from "../../contexts/UserCollectibleContext";
-import {collectibleImages} from "../../utils/images/imageMap";
 import {useNavigation} from "@react-navigation/native";
 import type {StackNavigationProp} from "@react-navigation/stack";
 import {HomeStackList} from "../../types/stackParamList";
@@ -16,35 +15,42 @@ type CollectScreenNavProp = StackNavigationProp<HomeStackList, 'Collection'>;
 const CollectibleListItem : React.FC<CollectibleListItemProps> = ({ collectible }) => {
     const { userCollectibles } = useUserCollectibleContext();
     
-    const userCollectible = userCollectibles?.find(c => c.collectibleId === collectible.id)
+    const userCollectible = userCollectibles
+        ?.find(c => c.collectibleId === collectible.id)
     
     const navigation = useNavigation<CollectScreenNavProp>();
     
-    const collectibleImage = <View style={styles.container}>
+    const collectibleItem = <View 
+        style={userCollectible ? 
+            styles.activeContainer : 
+            styles.inactiveContainer}
+    >
+        <Text style={userCollectible ? styles.activeLabel : styles.inactiveLabel}>
+            {collectible.name}
+        </Text>
         {
             userCollectible ?
                 <Image
-                    source={collectibleImages['boulders-beach.png']}
-                    resizeMode="contain"
-                /> :
-                <Image
-                    source={collectibleImages['locked.png']}
+                    source={require('../../../assets/images/icons/Trophy - Active.png')}
                     resizeMode="contain"
                 />
+                 :
+                <Image
+                    source={require('../../../assets/images/icons/Trophy - Inactive.png')}
+                    resizeMode="contain"
+                    style={styles.inactiveTrophy}
+                />
         }
-        <Text style={styles.label}>
-            {collectible.name}
-        </Text>
     </View>;
     
     return (<>
         {
             userCollectible ?
-                <TouchableOpacity onPress={() => navigation.navigate('CollectibleStack', { collectible })}>
-                    {collectibleImage}
+                <TouchableOpacity onPress={() => navigation.navigate('CollectibleLog', { collectible })}>
+                    {collectibleItem}
                 </TouchableOpacity> : 
                 <TouchableOpacity onPress={() => navigation.navigate('CollectibleClue', { collectible })}>
-                    {collectibleImage}
+                    {collectibleItem}
                 </TouchableOpacity>
                 
         }
@@ -52,15 +58,39 @@ const CollectibleListItem : React.FC<CollectibleListItemProps> = ({ collectible 
 }
 
 const styles = StyleSheet.create({
-    container: {
+    activeContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 8,
-        width: 152
+        borderWidth: 2,
+        borderColor: '#2A584F',
+        backgroundColor: '#96E6D4',
+        borderRadius: 4,
+        width: '100%',
+        paddingHorizontal: 16,
+        paddingVertical: 8
     },
-    label: {
+    inactiveContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: 'rgba(42, 88, 79, 0.5)',
+        backgroundColor: 'rgba(150, 230, 212, 0.5)',
+        borderRadius: 4,
+        width: '100%',
+        paddingHorizontal: 16,
+        paddingVertical: 8
+    },
+    activeLabel: {
+        ...fontStyles.H5
+    },
+    inactiveLabel: {
         ...fontStyles.H5,
-        textAlign: 'center',
-        flexWrap: 'wrap',
+        opacity: 0.5
+    },
+    inactiveTrophy: {
+        opacity: 0.5
     }
 });
 

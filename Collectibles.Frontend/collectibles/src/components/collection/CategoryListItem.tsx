@@ -22,8 +22,6 @@ const CategoryListItem : FC<CategoryListItemProps> = ({ category }) => {
             .length ?? 0;
     }, [userCollectibles]);
     
-    let gemImagePath: string;
-
     const gemImages = {
         [CategoryType.IconicPlaces]: require('../../../assets/images/gems/Sapphire.png'),
         [CategoryType.FoodAndCulture]: require('../../../assets/images/gems/Ruby.png'),
@@ -41,23 +39,16 @@ const CategoryListItem : FC<CategoryListItemProps> = ({ category }) => {
             </View>
         </View>
         <View style={styles.collectibleViewContainer}>
-            <ScrollView 
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                style={styles.collectibleScrollContainer}
-                contentContainerStyle={styles.collectibleContentContainer}
-            >
-                {
-                    category.collectibles.map(collectible => {
-                        return (
-                            <CollectibleListItem 
-                                key={collectible.id} 
-                                collectible={collectible} 
-                            />
-                        )
-                    })
-                }
-            </ScrollView>
+            {
+                category.collectibles.map(collectible => {
+                    return (
+                        <CollectibleListItem 
+                            key={collectible.id} 
+                            collectible={collectible} 
+                        />
+                    )
+                })
+            }
         </View>
     </View>)
 }
@@ -83,14 +74,10 @@ const styles = StyleSheet.create({
         ...fontStyles.H5
     },
     collectibleViewContainer: {
-        flexDirection: 'row',
-    },
-    collectibleScrollContainer: {
-        marginHorizontal: -16, 
-        paddingLeft: 8
-    },
-    collectibleContentContainer: {
-        gap: 0
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        gap: 4
     }
 });
 

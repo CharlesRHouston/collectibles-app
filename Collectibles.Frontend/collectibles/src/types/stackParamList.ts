@@ -12,7 +12,7 @@ export type HomeStackList = {
   'Home': undefined;
   'Collection': { collection: Collection };
   'CollectibleClue': { collectible: Collectible };
-  'CollectibleStack': { collectible: Collectible };
+  'CollectibleLog': { collectible: Collectible };
 };
 
 export type CollectibleStackList = {

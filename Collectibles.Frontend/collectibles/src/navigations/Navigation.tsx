@@ -1,21 +1,18 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import WelcomeScreen from "../screens/auth/WelcomeScreen";
 import SignupScreen from "../screens/auth/SignupScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import {
     AuthStackList,
-    CollectibleStackList,
     CollectStackList,
     HomeStackList, MainStackList,
     SettingsStackList
 } from "../types/stackParamList";
-import CollectibleDetailScreen from "../screens/home/CollectibleDetailScreen";
 import CollectibleLogScreen from "../screens/home/CollectibleLogScreen";
 import HomeScreen from "../screens/home/HomeScreen";
 import CollectionScreen from "../screens/home/CollectionScreen";
-import ClueScreen from "../screens/home/ClueScreen";
+import CollectibleClueScreen from "../screens/home/CollectibleClueScreen";
 import ChooseCollectibleScreen from "../screens/collect/add/ChooseCollectibleScreen";
 import UploadPhotoScreen from "../screens/collect/add/UploadPhotoScreen";
 import AddDetailsScreen from "../screens/collect/add/AddDetailsScreen";
@@ -40,17 +37,6 @@ export function AuthStack() {
     );
 }
 
-const TopTab = createMaterialTopTabNavigator<CollectibleStackList>();
-
-function CollectibleStack() {
-    return (
-        <TopTab.Navigator initialRouteName="CollectibleDetails">
-            <TopTab.Screen name="CollectibleDetails" component={CollectibleDetailScreen} />
-            <TopTab.Screen name="CollectibleLog" component={CollectibleLogScreen} />
-        </TopTab.Navigator>
-    );
-}
-
 const Home = createStackNavigator<HomeStackList>();
 
 function HomeStack() {
@@ -58,8 +44,8 @@ function HomeStack() {
         <Home.Navigator initialRouteName="Home">
             <Home.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
             <Home.Screen name="Collection" component={CollectionScreen} options={{ headerShown: false }}/>
-            <Home.Screen name="CollectibleClue" component={ClueScreen} options={{ headerShown: false }}/>
-            <Home.Screen name="CollectibleStack" component={CollectibleStack} options={{ headerShown: false }}/>
+            <Home.Screen name="CollectibleClue" component={CollectibleClueScreen} options={{ headerShown: false }}/>
+            <Home.Screen name="CollectibleLog" component={CollectibleLogScreen} options={{ headerShown: false }}/>
         </Home.Navigator>
     );
 }

@@ -7,7 +7,7 @@ import {fontStyles} from "../../styles/fontStyles";
 
 type Props = StackScreenProps<HomeStackList, 'CollectibleClue'>;
 
-const ClueScreen: React.FC<Props> = ({ route }) => {
+const CollectibleClueScreen: React.FC<Props> = ({ route }) => {
     const { collectible } = route.params;
     
     return (
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ClueScreen;
+export default CollectibleClueScreen;
