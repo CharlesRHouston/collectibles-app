@@ -9,13 +9,6 @@ namespace Collectibles.Backend.Api.Services;
 
 public class PasswordService : IPasswordService
 {
-    private readonly JwtSettings _settings;
-    
-    public PasswordService(IOptions<JwtSettings> settings)
-    {
-        _settings = settings.Value;
-    }
-    
     public string HashPassword(string password)
     {
         return BCrypt.Net.BCrypt.EnhancedHashPassword(password, 13);

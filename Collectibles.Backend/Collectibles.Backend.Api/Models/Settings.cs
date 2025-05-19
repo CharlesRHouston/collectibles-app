@@ -8,3 +8,9 @@ public class JwtSettings
     public int AccessTokenExpirationMinutes { get; init; }
     public int RefreshTokenExpirationDays { get; init; }
 }
+
+public class S3Settings
+{
+    public string BucketName { get; set; }
+    public int UrlExpirationSeconds { get; set; }
+}

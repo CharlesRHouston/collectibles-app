@@ -3,9 +3,16 @@
 # DynamoDB local endpoint
 ENDPOINT="http://localhost:8000"
 
+echo "Launching LocalStack container..."
+docker run -d --name localstack -p 4566:4566 -e SERVICES=s3 localstack/localstack
+sleep 5
+
+echo "Creating bucket..."
+awslocal s3 mb s3://dev-images
+
 echo "Launching DynamoDB container..."
 docker run -d -p 8000:8000 --name dynamodb-local amazon/dynamodb-local 
-sleep 4
+sleep 5
 
 echo "Creating tables..."
 

@@ -30,7 +30,7 @@ internal class TokenService : ITokenService
             {
                 new(JwtRegisteredClaimNames.Sub, userId.ToString()),
             },
-            expires: DateTime.Now.AddMinutes(_settings.AccessTokenExpirationMinutes ),
+            expires: DateTime.Now.AddMinutes(_settings.AccessTokenExpirationMinutes),
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
