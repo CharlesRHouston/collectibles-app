@@ -27,45 +27,45 @@ const HomeScreen: React.FC = () => {
                 style={styles.cloudTwo}
                 source={require('../../../assets/images/environment/Cloud - 2.png')}
             />
-            <TotalScore />
-            <View style={{ flexDirection: 'row', gap: 24}}>
-                <CategoryTypeScore 
-                    label={"Iconic Places"}  
-                    imagePath={require('../../../assets/images/gems/Sapphire.png')}
-                    category={CategoryType.IconicPlaces}
-                />
-                <CategoryTypeScore
-                    label={"Fauna & Flora"}
-                    imagePath={require('../../../assets/images/gems/Emerald.png')}
-                    category={CategoryType.FaunaAndFlora}
-                />
-                <CategoryTypeScore
-                    label={"Food & Culture"}
-                    imagePath={require('../../../assets/images/gems/Ruby.png')}
-                    category={CategoryType.FoodAndCulture}
-                />
-            </View>
-            <View style={{ width: '100%', gap: 12}}>
-                <Text style={styles.collectionHeading}>MY COLLECTIONS</Text>
-                <View>
-                    {
-                        collections &&
-                            collections.map(collection => {
-                                return (
-                                    <TouchableOpacity 
-                                        key={collection.id}
-                                        onPress={() => navigation.navigate('Collection', { collection })}
-                                    >
-                                        <CollectionListItem
-                                            label={collection.name}
-                                            imagePath={require('../../../assets/images/flags/South Africa.png')}
-                                            collectionId={collection.id}
-                                        />
-                                    </TouchableOpacity>
-                                )
-                            })
-                    }
+            <View style={{ gap: 16 }}>
+                <TotalScore />
+                <View style={{ flexDirection: 'row', gap: 24}}>
+                    <CategoryTypeScore 
+                        label={"Iconic Places"}  
+                        imagePath={require('../../../assets/images/gems/Sapphire.png')}
+                        category={CategoryType.IconicPlaces}
+                    />
+                    <CategoryTypeScore
+                        label={"Fauna & Flora"}
+                        imagePath={require('../../../assets/images/gems/Emerald.png')}
+                        category={CategoryType.FaunaAndFlora}
+                    />
+                    <CategoryTypeScore
+                        label={"Food & Culture"}
+                        imagePath={require('../../../assets/images/gems/Ruby.png')}
+                        category={CategoryType.FoodAndCulture}
+                    />
                 </View>
+            </View>
+            <View style={{ width: '100%', gap: 24}}>
+                <Text style={styles.collectionHeading}>MY COLLECTIONS</Text>
+                {
+                    collections &&
+                        collections.map(collection => {
+                            return (
+                                <TouchableOpacity 
+                                    key={collection.id}
+                                    onPress={() => navigation.navigate('Collection', { collection })}
+                                >
+                                    <CollectionListItem
+                                        label={collection.name}
+                                        imagePath={require('../../../assets/images/flags/South Africa.png')}
+                                        collectionId={collection.id}
+                                    />
+                                </TouchableOpacity>
+                            )
+                        })
+                }
             </View>
         </View>
     </>)
@@ -74,7 +74,8 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
     collectionHeading: {
         ...fontStyles.H4,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
+        gap: 40
     },
     screen: {
         ...screenStyles.containerWithoutNavigation, 
