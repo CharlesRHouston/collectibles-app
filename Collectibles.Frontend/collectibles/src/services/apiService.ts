@@ -6,6 +6,7 @@ import {GetUserResponse, UpdateUserRequest} from "../types/user";
 import {RefreshRequest} from "../types/authentication";
 import {Collection} from "../types/collection";
 import {PutCollectibleRequest, UserCollectible} from "../types/userCollectible";
+import {GetPresignedUrlResponse} from "../types/image";
 
 interface IDataBaseService {
     logout(request : RefreshRequest): Promise<AxiosResponse>;
@@ -89,8 +90,24 @@ class DatabaseService implements IDataBaseService {
     }
 
     putCollectible = async (collectibleId: string, collectible: PutCollectibleRequest) => {
-        return await this.api.put(`api/v1/user/collectible/${collectibleId}`, {
+        return await this.api.put<HttpResponse<GetPresignedUrlResponse>>(`api/v1/user/collectible/${collectibleId}`, {
             data: collectible
+        });
+    }
+    
+    getSignedUrlForUpload = async (fileName: string) => {
+        return await this.api.post<HttpResponse<GetPresignedUrlResponse>>('api/v1/image/upload', {
+            data: {
+                fileName
+            }
+        });
+    }
+
+    getSignedUrlForDownload = async (fileName: string) => {
+        return await this.api.post('api/v1/image/download', {
+            data: {
+                fileName
+            }
         });
     }
 }
