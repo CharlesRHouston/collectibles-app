@@ -19,5 +19,6 @@ aws dynamodb get-item \
   --endpoint-url http://localhost:8000
   
 aws dynamodb scan --table-name Collection --endpoint-url http://localhost:8000
+aws dynamodb scan --table-name Collectible --endpoint-url http://localhost:8000
 aws dynamodb scan --table-name Refresh --endpoint-url http://localhost:8000
 aws dynamodb scan --table-name User --endpoint-url http://localhost:8000
