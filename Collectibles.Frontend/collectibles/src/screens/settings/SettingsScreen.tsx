@@ -9,13 +9,34 @@ import {useNavigation} from "@react-navigation/native";
 import {SettingsStackList} from "../../types/stackParamList";
 import {StackNavigationProp} from "@react-navigation/stack";
 import Screen from "../../components/Screen";
-import {onSubmitSignout} from "../../utils/auth/onSubmitSignout";
 import {buttonContainerStyles} from "../../styles/buttonStyles";
+import ApiService from "../../services/apiService";
+import axios from "axios";
 
 const SettingsScreen: React.FC = () => {
     const {state, dispatch} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation<StackNavigationProp<SettingsStackList, 'Settings'>>();
+
+    const onSubmitSignout = async () : Promise<void> => {
+        try {
+            setLoading(true);
+            await ApiService.logout({
+                refreshToken: await SecureStore.getItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY)
+            })
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.error("Axios error:", error.response?.status, error.response?.data);
+            } else {
+                console.error("Unexpected error:", error);
+            }
+        } finally {
+            await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_REFRESH_TOKEN_KEY);
+            await SecureStore.deleteItemAsync(process.env.EXPO_PUBLIC_ACCESS_TOKEN_KEY);
+            dispatch({ type: "SIGN_OUT"});
+            setLoading(false);
+        }
+    }
     
     return (<>
         {
@@ -35,7 +56,7 @@ const SettingsScreen: React.FC = () => {
                     <Button
                         label={"Sign out"}
                         type={'secondary'}
-                        onPress={() => onSubmitSignout(setLoading, dispatch)} />
+                        onPress={async () => await onSubmitSignout()} />
                 </View>
             </ScrollView>
         </Screen>
