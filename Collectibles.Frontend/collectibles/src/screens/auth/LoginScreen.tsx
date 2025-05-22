@@ -73,7 +73,7 @@ const LoginScreen: React.FC = () => {
                     value={loginForm.password.value}
                     mandatory={true}
                     onTextChange={(text) => setLoginForm({...loginForm, password: { value: text, errors: loginForm.password.errors }})}
-                    showIcon={true}
+                    hideIcon={true}
                 />
             </View>
             <Button

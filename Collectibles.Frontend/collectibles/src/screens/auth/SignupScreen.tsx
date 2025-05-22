@@ -98,7 +98,7 @@ const SignupScreen: React.FC = () => {
                             value={signupForm.password.value}
                             mandatory={true}
                             onTextChange={(text) => setSignupForm({...signupForm, password: { value: text, errors: signupForm.password.errors }})}
-                            showIcon={false}
+                            hideIcon={true}
                             validateField={() => ValidatePassword(signupForm.password, setSignupForm)}
                             errors={signupForm.password.errors}
                         />
@@ -107,7 +107,7 @@ const SignupScreen: React.FC = () => {
                             value={signupForm.confirmPassword.value}
                             mandatory={true}
                             onTextChange={(text) => setSignupForm({...signupForm, confirmPassword: { value: text, errors: signupForm.confirmPassword.errors }})}
-                            showIcon={false}
+                            hideIcon={true}
                             validateField={() => ValidateConfirmPassword(signupForm.password, signupForm.confirmPassword, setSignupForm)}
                             errors={signupForm.confirmPassword.errors}
                         />

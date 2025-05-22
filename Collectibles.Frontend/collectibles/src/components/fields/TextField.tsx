@@ -17,7 +17,7 @@ interface TextFieldProps {
     onTextChange: (text: string) => void;
     validateField?: ((text: string) => void);
     errors?:string[];
-    showIcon?: boolean;
+    hideIcon?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -26,11 +26,11 @@ const TextField: React.FC<TextFieldProps> = ({
         onTextChange, 
         validateField,
         mandatory=false, 
-        showIcon=false, 
+        hideIcon=false, 
         errors=[]
     }) => {
     
-    const [isTextMasked, setIsTextMasked] = useState(showIcon);
+    const [isTextHidden, setIsTextHidden] = useState(hideIcon);
     
     return (
         <View style={styles.container}>
@@ -42,18 +42,18 @@ const TextField: React.FC<TextFieldProps> = ({
                 <TextInput 
                     style={styles.input} 
                     value={value} 
-                    onChangeText={onTextChange} 
+                    onChangeText={onTextChange}
+                    onBlur={validateField ? (e) => validateField(e.nativeEvent.text) : undefined}
                     autoCapitalize={"none"} 
                     autoCorrect={false}
-                    secureTextEntry={isTextMasked}
-                    onBlur={validateField ? (e) => validateField(e.nativeEvent.text) : undefined}
+                    secureTextEntry={isTextHidden}
                 />
-                {showIcon && 
+                {hideIcon && 
                     <TouchableOpacity 
-                        onPress={() => setIsTextMasked(!isTextMasked) }
+                        onPress={() => setIsTextHidden(!isTextHidden) }
                         style={styles.icon}
                     >
-                        {isTextMasked ?
+                        {isTextHidden ?
                             <AntDesign name="eye" size={24} color="black" /> : 
                             <AntDesign name="eyeo" size={24} color="black" /> }
                     </TouchableOpacity> }

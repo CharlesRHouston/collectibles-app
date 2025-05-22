@@ -33,7 +33,7 @@ const ChangePasswordScreen: React.FC = () => {
                     label={"New password"}
                     value={passwordForm.password.value}
                     mandatory={false}
-                    showIcon={true}
+                    hideIcon={true}
                     validateField={() => ValidatePassword(passwordForm.password, setPasswordForm)}
                     onTextChange={(text) => setPasswordForm({
                         ...passwordForm, 
@@ -47,7 +47,7 @@ const ChangePasswordScreen: React.FC = () => {
                 <TextField
                     label={"Confirm new password"}
                     value={passwordForm.confirmPassword.value}
-                    showIcon={true}
+                    hideIcon={true}
                     mandatory={false}
                     validateField={() => ValidateConfirmPassword(passwordForm.password, passwordForm.confirmPassword, setPasswordForm)}
                     onTextChange={(text) => setPasswordForm({
