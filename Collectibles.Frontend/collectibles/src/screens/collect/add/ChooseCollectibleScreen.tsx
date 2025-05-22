@@ -9,7 +9,7 @@ import SelectField, {DropdownData} from "../../../components/fields/SelectField"
 import Screen from "../../../components/Screen";
 import Section from "../../../components/Section";
 import Button from "../../../components/Button";
-import {validateChooseCollectible} from "../../../utils/validation/validateCollectForm";
+import {validateForm} from "../../../utils/validation/validateCollectForm";
 import {buttonContainerStyles} from "../../../styles/buttonStyles";
 import {errorStyles} from "../../../styles/errorStyles";
 
@@ -118,14 +118,27 @@ const ChooseCollectibleScreen: React.FC = () => {
                             collectionId: null,
                             imageUrl: null,
                         });
-                        navigation.goBack();
+                        //TODO: navigate to home screen
                     }} 
                     type={'secondary'} 
                 />
                 <Button 
                     label={"Next"} 
                     onPress={() => {
-                        const isValid = validateChooseCollectible(form, errors, setErrors);
+                        const isValid = validateForm(errors, setErrors, [
+                            {
+                                condition: form.collectionId === null,
+                                message: "Collection must be selected.",
+                            },
+                            {
+                                condition: form.categoryId === null,
+                                message: "Category must be selected.",
+                            },
+                            {
+                                condition: form.collectibleId === null,
+                                message: "Collectible must be selected.",
+                            },
+                        ]);
                         if (isValid) {
                             navigation.navigate('UploadPhoto');
                         }
