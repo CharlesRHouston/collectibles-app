@@ -23,7 +23,7 @@ namespace CollectiblesInfrastructure
             ProvisionAppRunner(appRuntimeRole);
         }
 
-        private void ProvisionS3Bucket(Role role)
+        private void ProvisionS3Bucket(Role appRuntimeRole)
         {
             var bucket = new Bucket(this, "DevImagesBucket", new BucketProps
             {
@@ -32,10 +32,10 @@ namespace CollectiblesInfrastructure
                 AutoDeleteObjects = true
             });
             
-            bucket.GrantReadWrite(role);
+            bucket.GrantReadWrite(appRuntimeRole);
         }
 
-        private void ProvisionDynamoDBTables(Role role)
+        private void ProvisionDynamoDBTables(Role appRuntimeRole)
         {
             var userTable = new Table(this, "UserTable", new TableProps
             {
@@ -85,10 +85,10 @@ namespace CollectiblesInfrastructure
                 ProjectionType = ProjectionType.ALL,
             });
             
-            userTable.GrantReadWriteData(role);
-            collectionTable.GrantReadWriteData(role);
-            collectibleTable.GrantReadWriteData(role);
-            refreshTable.GrantReadWriteData(role);
+            userTable.GrantReadWriteData(appRuntimeRole);
+            collectionTable.GrantReadWriteData(appRuntimeRole);
+            collectibleTable.GrantReadWriteData(appRuntimeRole);
+            refreshTable.GrantReadWriteData(appRuntimeRole);
         }
 
         private void ProvisionAppRunner(Role appRuntimeRole)
