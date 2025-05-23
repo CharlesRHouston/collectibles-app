@@ -7,7 +7,7 @@ using Amazon.CDK.AWS.IAM;
 using Amazon.CDK.AWS.S3;
 using Constructs;
 
-namespace CollectiblesInfrastructure
+namespace Collectibles.Infrastructure
 {
     public class CollectiblesInfrastructureStack : Stack
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectiblesInfrastructure", "CollectiblesInfrastructure\CollectiblesInfrastructure.csproj", "{9DC1593A-7AD0-486C-A07D-F87560FB8F34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collectibles.Infrastructure.Stack", "Collectibles.Infrastructure.Stack\Collectibles.Infrastructure.Stack.csproj", "{9DC1593A-7AD0-486C-A07D-F87560FB8F34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
