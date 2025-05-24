@@ -82,7 +82,7 @@ const AddDetailsScreen: React.FC = () => {
             collectionId: null,
             categoryId: null,
             collectibleId: null,
-            imageUrl: null,
+            imageUri: null,
             dateCollected: new Date(),
             description: null,
             bonus: null,
@@ -141,9 +141,9 @@ const AddDetailsScreen: React.FC = () => {
             const isValid = validateAddDetailsForm();
 
             if (isValid) {
-                const presignedResponse = await ApiService.getSignedUrlForUpload("test-file"); //TODO: correct fileName
+                const presignedResponse = await ApiService.getSignedUrlForUpload(form.collectibleId!);
 
-                await uploadImageToS3(presignedResponse.data.data.url, form.imageUrl!);
+                await uploadImageToS3(presignedResponse.data.data.url, form.imageUri!);
 
                 const request: PutCollectibleRequest = {
                     collectionId: form.collectionId!,
@@ -152,7 +152,6 @@ const AddDetailsScreen: React.FC = () => {
                     active: true,
                     description: form.description!,
                     bonusAchieved: form.bonus!,
-                    imageUrl: form.imageUrl ?? "placeholder",
                     categoryType: getCategoryType(form.collectionId!, form.categoryId!)!
                 }
                 

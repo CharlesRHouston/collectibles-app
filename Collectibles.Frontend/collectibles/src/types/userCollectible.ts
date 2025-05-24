@@ -7,7 +7,6 @@ export interface UserCollectible {
     active: boolean;
     description: string;
     collectedAt: string;
-    imageUrl: string;
     bonusAchieved: boolean;
     categoryType: CategoryType;
 }
@@ -18,7 +17,6 @@ export interface PutCollectibleRequest {
     active: boolean;
     description: string;
     collectedAt: string;
-    imageUrl: string;
     bonusAchieved: boolean;
     categoryType: CategoryType;
 }

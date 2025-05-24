@@ -4,7 +4,7 @@ export type CollectForm = {
     collectionId?: string|null;
     categoryId?: string|null;
     collectibleId?: string|null;
-    imageUrl?: string|null;
+    imageUri?: string|null;
     dateCollected?: Date|null;
     description?: string|null;
     bonus?: boolean|null;

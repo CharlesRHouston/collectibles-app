@@ -116,7 +116,7 @@ const ChooseCollectibleScreen: React.FC = () => {
                             dateCollected: new Date(),
                             collectibleId: null,
                             collectionId: null,
-                            imageUrl: null,
+                            imageUri: null,
                         });
                         //TODO: navigate to home screen
                     }} 

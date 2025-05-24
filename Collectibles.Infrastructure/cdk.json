@@ -1,5 +1,5 @@
 {
-  "app": "dotnet run --project src/CollectiblesInfrastructure/CollectiblesInfrastructure.csproj",
+  "app": "dotnet run --project src/Collectibles.Infrastructure.Stack/Collectibles.Infrastructure.Stack.csproj",
   "watch": {
     "include": [
       "**"

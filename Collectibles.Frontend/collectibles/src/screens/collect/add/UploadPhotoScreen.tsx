@@ -32,7 +32,7 @@ const UploadPhotoScreen: React.FC = () => {
         });
 
         if (!result.canceled) {
-            setForm({...form, imageUrl: result.assets[0].uri});
+            setForm({...form, imageUri: result.assets[0].uri});
         }
     }
     
@@ -41,7 +41,7 @@ const UploadPhotoScreen: React.FC = () => {
             <Section title={"Upload photo"}>
                 <View style={styles.uploadPhoto}>
                     {
-                        form.imageUrl ? 
+                        form.imageUri ? 
                             <>
                                 <Text style={styles.label}>Image selected successfully</Text>
                             </> :
@@ -63,7 +63,7 @@ const UploadPhotoScreen: React.FC = () => {
                     onPress={() => {
                         const isValid = validateForm(errors, setErrors, [
                             {
-                                condition: form.imageUrl === null,
+                                condition: form.imageUri === null,
                                 message: "Image must be selected from library.",
                             }
                         ]);

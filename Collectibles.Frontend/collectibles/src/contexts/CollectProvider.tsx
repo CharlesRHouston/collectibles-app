@@ -10,7 +10,7 @@ export const CollectProvider: FC<CollectProviderProps> = ({ children }) => {
         collectionId: null,
         categoryId: null,
         collectibleId: null,
-        imageUrl: null,
+        imageUri: null,
         dateCollected: new Date(),
         bonus: null,
         description: null,

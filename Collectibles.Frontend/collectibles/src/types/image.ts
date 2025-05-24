@@ -1,5 +1,5 @@
 export interface GetPresignedUrlRequest {
-    filename: string
+    collectibleId: string
 }
 
 export interface GetPresignedUrlResponse {
