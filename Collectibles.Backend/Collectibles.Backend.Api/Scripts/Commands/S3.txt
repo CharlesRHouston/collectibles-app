@@ -1,2 +1,0 @@
-awslocal s3api list-buckets
-awslocal s3 ls s3://dev-images/
