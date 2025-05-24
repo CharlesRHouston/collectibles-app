@@ -263,7 +263,6 @@ public class DatabaseAccessService : IDatabaseAccessService
                 { "active", new AttributeValue { BOOL = collectible.Active } },
                 { "description", new AttributeValue { S = collectible.Description } },
                 { "collectedAt", new AttributeValue { S = collectible.CollectedAt.ToString(CultureInfo.InvariantCulture) }},
-                { "imageUrl", new AttributeValue { S = collectible.ImageUrl } },
                 { "bonusAchieved", new AttributeValue { BOOL = collectible.BonusAchieved } },
                 { "categoryType", new AttributeValue { S = collectible.CategoryType.ToString() } }
             }

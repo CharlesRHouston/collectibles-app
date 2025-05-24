@@ -9,7 +9,6 @@ public class UserCollectible
     public bool? Active { get; set; }
     public string Description { get; set; }
     public DateTime CollectedAt { get; set; }
-    public string ImageUrl { get; set; }
     public bool? BonusAchieved { get; set; }
     public CategoryType CategoryType { get; set; }
 }
@@ -21,7 +20,6 @@ public class PutCollectibleRequest
     public bool? Active { get; set; }
     public string Description { get; set; }
     public DateTime CollectedAt { get; set; }
-    public string ImageUrl { get; set; }
     public bool? BonusAchieved { get; set; }
     public CategoryType CategoryType { get; set; }
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Collectibles.Backend.Api.Models;
@@ -24,9 +25,16 @@ public class ImageController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetPresignedUrlForUpload([FromBody] Dto<GetPresignedUrlRequest> request)
     {
-        if (string.IsNullOrWhiteSpace(request?.Data?.Filename))
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+        if (userId == null)
         {
-            return BadRequest("Filename must be provided.");
+            return Unauthorized("User ID not found in token.");
+        }
+        
+        if (string.IsNullOrWhiteSpace(request?.Data?.CollectibleId))
+        {
+            return BadRequest("CollectibleId must be provided.");
         }
         
         try
@@ -34,7 +42,7 @@ public class ImageController : ControllerBase
             var url = await _client.GetPreSignedURLAsync(new GetPreSignedUrlRequest
             {
                 BucketName = _settings.BucketName,
-                Key = request.Data.Filename,
+                Key = $"{userId}:{request.Data.CollectibleId}",
                 Verb = HttpVerb.PUT,
                 Expires = DateTime.UtcNow.AddSeconds(_settings.UrlExpirationSeconds),
                 ContentType = "image/jpeg",
@@ -59,9 +67,16 @@ public class ImageController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetPresignedUrlForDownload([FromBody] Dto<GetPresignedUrlRequest> request)
     {
-        if (string.IsNullOrWhiteSpace(request?.Data?.Filename))
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+        if (userId == null)
         {
-            return BadRequest("Filename must be provided.");
+            return Unauthorized("User ID not found in token.");
+        }
+        
+        if (string.IsNullOrWhiteSpace(request?.Data?.CollectibleId))
+        {
+            return BadRequest("CollectibleId must be provided.");
         }
         
         try
@@ -69,10 +84,9 @@ public class ImageController : ControllerBase
             var url = await _client.GetPreSignedURLAsync(new GetPreSignedUrlRequest
             {
                 BucketName = _settings.BucketName,
-                Key = request.Data.Filename,
+                Key = $"{userId}:{request.Data.CollectibleId}",
                 Verb = HttpVerb.GET,
-                Expires = DateTime.UtcNow.AddSeconds(_settings.UrlExpirationSeconds),
-                ContentType = "image/jpeg"
+                Expires = DateTime.UtcNow.AddSeconds(_settings.UrlExpirationSeconds)
             });
 
             return Ok(new Dto<GetPresignedUrlResponse>

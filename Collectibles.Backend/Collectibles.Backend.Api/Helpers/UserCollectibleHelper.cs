@@ -21,7 +21,6 @@ public static class UserCollectibleHelper
                 Description = item["description"].S,
                 BonusAchieved = item["bonusAchieved"]?.BOOL,
                 CollectedAt = Convert.ToDateTime(item["collectedAt"].S),
-                ImageUrl = item["imageUrl"].S,
                 CategoryType = Enum.Parse<CategoryType>(item["categoryType"].S),
             });
         }
