@@ -38,6 +38,7 @@ Migrations/
 project.lock.json
 project.fragment.lock.json
 *.deps.json
+appsettings*.json
 
 ## NuGet
 *.nupkg
