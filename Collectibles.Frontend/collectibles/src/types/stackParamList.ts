@@ -1,4 +1,5 @@
 import {Collectible, Collection} from "./collection";
+import {NavigatorScreenParams} from "@react-navigation/native";
 
 export type AuthStackList = {
   'AuthStack': undefined;
@@ -40,7 +41,7 @@ export type SettingsStackList = {
 
 
 export type MainStackList = {
-  'HomeStack': undefined;
-  'CollectStack': undefined;
-  'SettingsStack': undefined;
+  'HomeStack': NavigatorScreenParams<HomeStackList>;
+  'CollectStack': NavigatorScreenParams<CollectStackList>;
+  'SettingsStack': NavigatorScreenParams<SettingsStackList>;
 };
