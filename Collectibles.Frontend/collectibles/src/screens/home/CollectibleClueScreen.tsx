@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         gap: 8
     },
     text: {
-        ...fontStyles.B3
+        ...fontStyles.B3,
+        textAlign: 'center'
     }
 });
 

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
 import Screen from "../../../components/Screen";
-import {CompositeNavigationProp, useNavigation} from "@react-navigation/native";
+import {CommonActions, CompositeNavigationProp, NavigatorScreenParams, useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useCollectContext} from "../../../contexts/CollectContext";
-import {CollectStackList, MainStackList} from "../../../types/stackParamList";
+import {CollectStackList, HomeStackList, MainStackList} from "../../../types/stackParamList";
 import Section from "../../../components/Section";
 import DateField from "../../../components/fields/DateField";
 import TextAreaField from "../../../components/fields/TextAreaField";
@@ -159,7 +159,37 @@ const AddDetailsScreen: React.FC = () => {
 
                 updateAndResetStates(request);
 
-                navigation.navigate('HomeStack');
+                navigation.dispatch(
+                    CommonActions.navigate({
+                        name: 'CollectStack',
+                        params: {
+                            screen: 'ChooseCollectible'
+                        },
+                    })
+                );
+
+                navigation.dispatch(
+                    CommonActions.navigate({
+                        name: 'HomeStack',
+                        params: {
+                            screen: 'Home'
+                        },
+                    })
+                );
+
+                const collectible = collections
+                    ?.find(c => c.id === form.collectionId!)
+                    ?.categories
+                    ?.find(c => c.id === form.categoryId!)
+                    ?.collectibles
+                    ?.find(c => c.id === form.collectibleId!);
+                
+                if (collectible){
+                    navigation.navigate('HomeStack', {
+                        screen: 'CollectibleLog',
+                        params: { collectible },
+                    } as NavigatorScreenParams<HomeStackList>);
+                }
             }
         } catch (error) {
             let errorMessage = "An unexpected error occurred.";

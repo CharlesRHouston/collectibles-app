@@ -1,10 +1,10 @@
 import React, {useMemo, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {useNavigation} from "@react-navigation/native";
+import {CompositeNavigationProp, useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {useCollectionContext} from "../../../contexts/CollectionContext";
 import {useCollectContext} from "../../../contexts/CollectContext";
-import {CollectStackList} from "../../../types/stackParamList";
+import {CollectStackList, MainStackList} from "../../../types/stackParamList";
 import SelectField, {DropdownData} from "../../../components/fields/SelectField";
 import Screen from "../../../components/Screen";
 import Section from "../../../components/Section";
@@ -12,10 +12,15 @@ import Button from "../../../components/Button";
 import {validateForm} from "../../../utils/validation/validateCollectForm";
 import {buttonContainerStyles} from "../../../styles/buttonStyles";
 import {errorStyles} from "../../../styles/errorStyles";
+import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 
+type ChooseScreenNavigationProp = CompositeNavigationProp<
+    StackNavigationProp<CollectStackList, 'Collect'>,
+    BottomTabNavigationProp<MainStackList>
+>;
 
 const ChooseCollectibleScreen: React.FC = () => {
-    const navigation = useNavigation<StackNavigationProp<CollectStackList, 'Collect'>>();
+    const navigation = useNavigation<ChooseScreenNavigationProp>();
     const { collections } = useCollectionContext();
     const { form, setForm } = useCollectContext();
     const [errors, setErrors] = useState<string[]>([]);
@@ -118,7 +123,10 @@ const ChooseCollectibleScreen: React.FC = () => {
                             collectionId: null,
                             imageUri: null,
                         });
-                        //TODO: navigate to home screen
+                        navigation.navigate('HomeStack',
+                            {
+                                screen: 'Home',
+                            });
                     }} 
                     type={'secondary'} 
                 />
