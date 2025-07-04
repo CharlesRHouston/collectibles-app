@@ -1,10 +1,10 @@
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, ActivityIndicator, View} from "react-native";
 import React from "react";
 
 
 const Loading : React.FC = () => {
     return (<View style={styles.loadingOverlay}>
-        <Text>Loading...</Text>
+        <ActivityIndicator size="large" color="#2A584F" />
     </View>)
 }
 
