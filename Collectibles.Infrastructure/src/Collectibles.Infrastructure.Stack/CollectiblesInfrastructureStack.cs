@@ -1,5 +1,4 @@
 using Amazon.CDK;
-using Amazon.CDK.AWS.AppConfig;
 using Amazon.CDK.AWS.AppRunner;
 using Amazon.CDK.AWS.DynamoDB;
 using Amazon.CDK.AWS.Ecr.Assets;
@@ -27,7 +26,7 @@ namespace Collectibles.Infrastructure
         {
             var bucket = new Bucket(this, "DevImagesBucket", new BucketProps
             {
-                BucketName = "dev-images-collectibles-45a1eccc",
+                BucketName = "collectibles-e1ba3230cb02",
                 RemovalPolicy = RemovalPolicy.DESTROY,
                 AutoDeleteObjects = true
             });
