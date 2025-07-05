@@ -17,15 +17,16 @@ Get out into the world, collect them all, increase your high score!
 
 View collections:
 
-![View Collections Demo](./gifs/viewCollections.gif)
+<img src="./gifs/viewCollections.gif" alt="View Collections Demo" width="400"/>
 
 Add a collectible:
 
-![View Collections Demo](./gifs/addCollectible.gif)
+<img src="./gifs/addCollectible.gif" alt="Add Collectible Demo" width="400"/>
+
 
 Change username:
 
-![View Collections Demo](./gifs/changeUsername.gif)
+<img src="./gifs/changeUsername.gif" alt="Change Username Demo" width="400"/>
 
 ## Dependencies
 
