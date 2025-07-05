@@ -3,6 +3,7 @@ import {type StackNavigationProp, StackScreenProps} from "@react-navigation/stac
 import {HomeStackList} from "../../types/stackParamList";
 import Screen from "../../components/Screen";
 import CategoryListItem from "../../components/collection/CategoryListItem";
+import {ScrollView} from "react-native";
 
 type Props = StackScreenProps<HomeStackList, 'Collection'>;
 
@@ -15,14 +16,16 @@ const CollectionScreen: React.FC<Props> = ({ route }) => {
             backNavigation={true} 
             dismissKeyboard={false} 
         >
-            {
-                collection.categories.map((category) => (
-                    <CategoryListItem 
-                        key={category.id}
-                        category={category} 
-                    />
-                ))
-            }
+            <ScrollView contentContainerStyle={{gap: 16, paddingBottom: 16}} showsVerticalScrollIndicator={false} >
+                {
+                    collection.categories.map((category) => (
+                        <CategoryListItem 
+                            key={category.id}
+                            category={category} 
+                        />
+                    ))
+                }
+            </ScrollView>
         </Screen>
     )
 }
