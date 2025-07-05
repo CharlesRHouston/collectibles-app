@@ -17,7 +17,7 @@ Get out into the world, collect them all, increase your high score!
 
 View collections:
 
-<img src="./gifs/viewCollections.gif" alt="View Collections Demo" width="200"/>
+<img src="./gifs/viewCollections.gif" alt="View Collections Demo" width="250"/>
 
 Add a collectible:
 
@@ -26,7 +26,7 @@ Add a collectible:
 
 Change username:
 
-<img src="./gifs/changeUsername.gif" alt="Change Username Demo" width="300"/>
+<img src="./gifs/changeUsername.gif" alt="Change Username Demo" width="250"/>
 
 ## Dependencies
 
