@@ -7,17 +7,17 @@ Get out into the world, collect them all, increase your high score!
 
 ## Features
 
-- 📲 Create account
 - 🚠 View collectibles
-- 💯 Track your high score 
 - 📸 Upload image and text
+- 💯 Track your high score
 - 👨‍🔧 Change username & password
+- 🔐 User authentication
 
 ## Screenshots
 
-### View collections:
+### View collection:
 
-<img src="./gifs/viewCollections.gif" alt="View Collections Demo" width="250"/>
+<img src="./gifs/viewCollection.gif" alt="View Collections Demo" width="250"/>
 
 ### Add collectible:
 
