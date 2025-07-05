@@ -15,6 +15,10 @@ Get out into the world, collect them all, increase your high score!
 
 ## Screenshots
 
+### Signup:
+
+<img src="./gifs/signup.gif" alt="Signup Demo" width="250"/>
+
 ### View collection:
 
 <img src="./gifs/viewCollection.gif" alt="View Collections Demo" width="250"/>
