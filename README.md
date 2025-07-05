@@ -15,16 +15,16 @@ Get out into the world, collect them all, increase your high score!
 
 ## Screenshots
 
-View collections:
+### View collections:
 
 <img src="./gifs/viewCollections.gif" alt="View Collections Demo" width="250"/>
 
-Add a collectible:
+### Add collectible:
 
 <img src="./gifs/addCollectible.gif" alt="Add Collectible Demo" width="250"/>
 
 
-Change username:
+### Change username:
 
 <img src="./gifs/changeUsername.gif" alt="Change Username Demo" width="250"/>
 
