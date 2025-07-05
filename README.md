@@ -5,13 +5,23 @@
 Real-world collectibles of places ⛰️, plants 🌷, animals 🦁, and food 🍷.
 Get out into the world, collect them all, increase your high score!
 
+## Table of Contents
+
+- [Description](#description)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Dependencies](#dependencies)
+- [Stack](#stack)
+- [Deployment](#deployment)
+
+
 ## Features
 
 - 🚠 View collectibles
 - 📸 Upload image and text
 - 💯 Track your high score
-- 👨‍🔧 Change username & password
-- 🔐 User authentication
+- 👨‍🔧 Update username & password
+- 🔐 Authenticate users securely
 
 ## Screenshots
 
@@ -31,6 +41,16 @@ Get out into the world, collect them all, increase your high score!
 ### Change username:
 
 <img src="./gifs/changeUsername.gif" alt="Change Username Demo" width="250"/>
+
+## Stack
+
+**UI/UX:** Figma
+
+**Frontend:** React Native (./Collectibles.Frontend)
+
+**Backend:** ASP.NET Web API (./Collectibles.Backend)
+
+**Infrastructure:** AWS App Runner (./Collectibles.Infrastructure)
 
 ## Dependencies
 
